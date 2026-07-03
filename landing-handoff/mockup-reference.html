@@ -1,0 +1,566 @@
+<title>Workdy — mockup sáng (bám style app)</title>
+<style>
+  :root{
+    --bg-base:#ffffff; --bg-subtle:#f9fafb; --bg-muted:#f3f4f6; --bg-page:#eff2f6;
+    --ink:#111827; --ink-soft:#6b7280; --ink-faint:#9ca3af;
+    --line:#e5e7eb; --line-subtle:#f0f0f0;
+    --link:#4F46E5;
+    --dot-ready:#22c55e; --dot-processing:#eab308; --dot-error:#ef4444; --dot-idle:#9ca3af;
+    --cat-blue:#3b82f6; --cat-purple:#8b5cf6; --cat-amber:#f59e0b; --cat-green:#22c55e; --cat-pink:#ec4899;
+  }
+  *{ box-sizing:border-box; }
+  .wrap{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         color:var(--ink); background:var(--bg-page); }
+  .shell-note{ max-width:1080px; margin:0 auto; padding:22px clamp(14px,4vw,32px) 4px; }
+  .shell-note .kick{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11.5px;
+        letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); }
+  .shell-note h1{ font-size:19px; font-weight:600; margin:7px 0 4px; letter-spacing:-.01em; }
+  .shell-note p{ color:var(--ink-soft); font-size:13.5px; margin:0; max-width:70ch; line-height:1.6; }
+
+  .frame{ max-width:1080px; margin:18px auto 30px; border:1px solid var(--line); border-radius:16px;
+        overflow:hidden; background:var(--bg-base); }
+
+  /* ============ NAV ============ */
+  nav.top{ display:flex; align-items:center; gap:28px; padding:18px clamp(20px,4vw,44px);
+        border-bottom:1px solid var(--line-subtle); }
+  nav.top .logo{ font-weight:700; font-size:16px; letter-spacing:-.02em; display:flex; align-items:center; gap:8px; }
+  nav.top .logo i{ width:8px; height:8px; border-radius:2px; background:var(--ink); display:inline-block; transform:rotate(45deg); }
+  nav.top .nl{ font-size:13.5px; color:var(--ink-soft); }
+  nav.top .sp{ flex:1; }
+  nav.top .login{ font-size:13.5px; color:var(--ink-soft); margin-right:6px; }
+  nav.top .btn-primary{ font-size:13.5px; padding:9px 16px; border-radius:8px; background:var(--ink);
+        color:#fff; font-weight:600; }
+
+  /* ============ HERO ============ */
+  .hero{ display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center;
+        padding:52px clamp(20px,4vw,44px) 56px; }
+  @media(max-width:760px){ .hero{ grid-template-columns:1fr; gap:28px; padding:36px 20px 40px; } }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600;
+        letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft);
+        background:var(--bg-muted); padding:6px 12px; border-radius:999px; }
+  .eyebrow i{ width:6px; height:6px; border-radius:50%; background:var(--dot-ready); display:inline-block; }
+  h2.headline{ font-size:clamp(32px,4.6vw,50px); font-weight:700; letter-spacing:-.03em;
+        line-height:1.08; margin:18px 0 0; text-wrap:balance; color:var(--ink); }
+  h2.headline .accent{ position:relative; }
+  h2.headline .accent::after{ content:''; position:absolute; left:0; right:0; bottom:4px; height:10px;
+        background:var(--cat-amber); opacity:.25; z-index:-1; border-radius:2px; }
+  .sub{ font-size:16.5px; line-height:1.6; color:var(--ink-soft); max-width:46ch; margin:20px 0 0; }
+  .cta-row{ display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
+  .b1{ font-size:14.5px; padding:13px 22px; border-radius:9px; font-weight:600; background:var(--ink); color:#fff; }
+  .b2{ font-size:14.5px; padding:13px 22px; border-radius:9px; font-weight:500; background:#fff;
+        color:var(--ink); border:1px solid var(--line); }
+
+  .roster{ border:1px solid var(--line); border-radius:14px; background:var(--bg-subtle); padding:6px 18px; }
+  .roster .rh{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10.5px;
+        letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint);
+        padding:14px 2px 8px; border-bottom:1px solid var(--line); }
+  .roster .row{ display:flex; align-items:center; gap:12px; padding:13px 2px; border-bottom:1px solid var(--line-subtle); }
+  .roster .row:last-child{ border-bottom:0; }
+  .roster .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
+  .roster .rn{ font-size:13.5px; font-weight:600; color:var(--ink); }
+  .roster .rr{ font-size:11.5px; color:var(--ink-faint); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  .roster .rv{ margin-left:auto; font-size:12px; color:var(--ink-soft); font-variant-numeric:tabular-nums;
+        background:var(--bg-muted); padding:3px 9px; border-radius:6px; }
+
+  /* ============ SECTION 2b — CAPABILITY STATS ============ */
+  .statband{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-subtle);
+        border-top:1px solid var(--line-subtle); border-bottom:1px solid var(--line-subtle); }
+  @media(max-width:640px){ .statband{ grid-template-columns:repeat(2,1fr); } }
+  .stat{ background:var(--bg-subtle); padding:26px 18px; text-align:center; }
+  .stat .num{ font-size:clamp(28px,3.6vw,40px); font-weight:700; letter-spacing:-.02em;
+        color:var(--ink); font-variant-numeric:tabular-nums; }
+  .stat .lab{ font-size:12.5px; color:var(--ink-soft); margin-top:5px; }
+
+  /* pulsing status dot (hero roster liveliness) */
+  @media(prefers-reduced-motion:no-preference){
+    .dot.pulse{ animation:dotPulse 1.8s ease-in-out infinite; }
+    @keyframes dotPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(34,197,94,.5); } 50%{ box-shadow:0 0 0 4px rgba(34,197,94,0); } }
+  }
+
+  /* ============ SECTION 4 — SCALE ============ */
+  .sect{ padding:52px clamp(20px,4vw,44px); border-top:1px solid var(--line-subtle); }
+  .sect-head{ max-width:640px; margin:0 auto 34px; text-align:center; }
+  .sect-head .tag{ font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--cat-purple); }
+  .sect-head h3{ font-size:clamp(24px,3.4vw,34px); font-weight:700; letter-spacing:-.02em; margin:10px 0 0; text-wrap:balance; }
+  .sect-head p{ font-size:15px; color:var(--ink-soft); margin:12px 0 0; line-height:1.6; }
+
+  .scale-demo{ max-width:760px; margin:0 auto; border:1px solid var(--line); border-radius:16px;
+        padding:28px 30px; background:var(--bg-subtle); }
+  .calc-label{ display:flex; justify-content:space-between; align-items:baseline; }
+  .calc-label .k{ font-size:12px; color:var(--ink-faint); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.06em; }
+  .calc-label .v{ font-size:15px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
+  input.calc-range{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:99px;
+        background:var(--line); margin:14px 0 4px; cursor:pointer; }
+  input.calc-range::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:20px; height:20px;
+        border-radius:50%; background:#fff; border:2px solid var(--ink); cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,.15); }
+  input.calc-range::-moz-range-thumb{ width:20px; height:20px; border-radius:50%; background:#fff;
+        border:2px solid var(--ink); cursor:pointer; }
+  .calc-out{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:22px; padding-top:20px; border-top:1px solid var(--line); }
+  @media(max-width:520px){ .calc-out{ grid-template-columns:1fr; } }
+  .calc-metric .n{ font-size:34px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); line-height:1; }
+  .calc-metric .l{ font-size:13px; color:var(--ink-soft); margin-top:6px; }
+  .calc-metric .est{ font-size:11px; color:var(--ink-faint); margin-top:3px; font-style:italic; }
+  .calc-badge{ display:inline-block; margin-top:16px; font-size:12px; color:var(--ink-soft);
+        background:var(--bg-muted); padding:5px 10px; border-radius:6px; }
+  .scale-row{ display:flex; align-items:center; gap:18px; }
+  .scale-track{ flex:1; height:6px; background:var(--line); border-radius:99px; position:relative; }
+  .scale-track .fill{ position:absolute; left:0; top:0; bottom:0; width:62%; background:var(--ink); border-radius:99px; }
+  .scale-track .thumb{ position:absolute; left:62%; top:50%; transform:translate(-50%,-50%);
+        width:18px; height:18px; border-radius:50%; background:#fff; border:2px solid var(--ink); }
+  .scale-nums{ display:flex; justify-content:space-between; margin-top:10px; font-size:11.5px;
+        color:var(--ink-faint); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  .scale-out{ display:flex; align-items:baseline; gap:10px; margin-top:22px; padding-top:20px;
+        border-top:1px solid var(--line); }
+  .scale-out .n{ font-size:34px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); }
+  .scale-out .l{ font-size:13.5px; color:var(--ink-soft); }
+  .scale-out .sp{ flex:1; }
+  .scale-out .badge{ font-size:12px; color:var(--ink-soft); background:var(--bg-muted); padding:5px 10px; border-radius:6px; }
+
+  .scale-points{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:840px; margin:26px auto 0; }
+  @media(max-width:700px){ .scale-points{ grid-template-columns:1fr; } }
+  .sp-card{ border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:#fff; }
+  .sp-card .t{ font-size:13.5px; font-weight:600; margin-bottom:5px; }
+  .sp-card .d{ font-size:12.5px; color:var(--ink-soft); line-height:1.55; }
+
+  /* ============ SECTION 5 — HOW IT WORKS + CANVAS DEMO ============ */
+  .hiw-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:38px; align-items:center;
+        max-width:980px; margin:0 auto; }
+  @media(max-width:760px){ .hiw-grid{ grid-template-columns:1fr; } }
+  .hiw-steps{ display:flex; flex-direction:column; gap:22px; }
+  .hiw-step{ display:flex; gap:14px; }
+  .hiw-step .num{ flex:none; width:28px; height:28px; border-radius:50%; background:var(--bg-muted);
+        color:var(--ink); font-size:12.5px; font-weight:700; display:flex; align-items:center;
+        justify-content:center; font-variant-numeric:tabular-nums; }
+  .hiw-step .tt{ font-size:14.5px; font-weight:600; margin-bottom:3px; }
+  .hiw-step .dd{ font-size:13px; color:var(--ink-soft); line-height:1.55; }
+
+  .demo-wrap{ width:100%; max-width:640px; height:190px; margin:0 auto; position:relative;
+        border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden; }
+  .demo-caption{ position:absolute; left:14px; bottom:11px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+        font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); z-index:2; }
+  .demo-node{ position:absolute; width:120px; height:52px; border-radius:10px; background:#fff;
+        border:1px solid var(--line); box-shadow:0 1px 2px rgba(0,0,0,.05); display:flex;
+        flex-direction:column; align-items:center; justify-content:center; text-align:center;
+        padding:0 8px; opacity:1; }
+  .demo-node .k{ font-size:8.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint);
+        font-family:ui-monospace,SFMono-Regular,Menlo,monospace; margin-bottom:2px; }
+  .demo-node .n{ font-size:11px; font-weight:600; color:var(--ink); line-height:1.25; }
+  .demo-svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .demo-svg path{ fill:none; stroke:var(--line); stroke-width:2; stroke-dasharray:150; stroke-dashoffset:0; }
+  .demo-curtain{ position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; z-index:3; }
+
+  /* ============ SECTION 6 — USE-CASE PIPELINES ============ */
+  .pl-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; max-width:960px; margin:0 auto; }
+  @media(max-width:760px){ .pl-grid{ grid-template-columns:1fr; } }
+  .pl-card{ border:1px solid var(--line); border-radius:14px; padding:20px 22px; background:#fff; }
+  .pl-card .cat{ display:inline-block; font-size:11px; font-weight:600; letter-spacing:.04em;
+        padding:4px 9px; border-radius:6px; margin-bottom:12px; }
+  .pl-card .t{ font-size:16px; font-weight:700; letter-spacing:-.01em; margin-bottom:6px; }
+  .pl-card .d{ font-size:13px; color:var(--ink-soft); line-height:1.55; margin-bottom:14px; }
+  .pl-steps{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+  .pl-steps .chip{ font-size:11px; padding:5px 9px; border-radius:6px; background:var(--bg-muted);
+        color:var(--ink-soft); border:1px solid var(--line-subtle); }
+  .pl-card .use{ font-size:13px; font-weight:600; color:var(--ink); display:inline-flex; align-items:center; gap:6px; }
+
+  /* ============ SECTION 2c — INTEGRATIONS GRID ============ */
+  .int-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:820px; margin:0 auto; }
+  @media(max-width:700px){ .int-grid{ grid-template-columns:repeat(2,1fr); } }
+  .int-tile{ border:1px solid var(--line); border-radius:12px; padding:20px 12px; background:#fff;
+        display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center;
+        transition:border-color .15s ease, box-shadow .15s ease; }
+  .int-tile:hover{ border-color:#d1d5db; box-shadow:0 4px 14px rgba(0,0,0,.05); }
+  .int-tile .ic{ width:34px; height:34px; border-radius:9px; background:var(--bg-muted);
+        display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:var(--ink-soft); }
+  .int-tile .lb{ font-size:12.5px; font-weight:600; color:var(--ink); }
+  .int-tile.more{ background:var(--bg-subtle); border-style:dashed; }
+  .int-tile.more .lb{ color:var(--ink-soft); font-weight:500; }
+
+  /* ============ SECTION 10 — STAY IN CONTROL (3 pillars) ============ */
+  .trust-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:900px; margin:0 auto; }
+  @media(max-width:760px){ .trust-grid{ grid-template-columns:1fr; } }
+  .trust-card{ border:1px solid var(--line); border-radius:14px; padding:22px 20px; background:#fff; }
+  .trust-card .ic{ width:36px; height:36px; border-radius:9px; background:var(--bg-muted);
+        display:flex; align-items:center; justify-content:center; margin-bottom:14px; font-size:16px; }
+  .trust-card .t{ font-size:14.5px; font-weight:700; margin-bottom:6px; }
+  .trust-card .d{ font-size:13px; color:var(--ink-soft); line-height:1.55; }
+
+  /* ============ SECTION 12b — FAQ ============ */
+  .faq{ max-width:740px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+  .faq-item{ border:1px solid var(--line); border-radius:12px; background:#fff; overflow:hidden; }
+  .faq-item summary{ list-style:none; cursor:pointer; padding:16px 20px; font-size:14px; font-weight:600;
+        display:flex; align-items:center; justify-content:space-between; gap:12px; color:var(--ink); }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary .chev{ flex:none; color:var(--ink-faint); font-size:12px; transition:transform .15s ease; }
+  .faq-item[open] summary .chev{ transform:rotate(180deg); }
+  .faq-item .a{ padding:0 20px 18px; font-size:13.5px; color:var(--ink-soft); line-height:1.6; }
+
+  @media(prefers-reduced-motion:no-preference){
+    .fade{ opacity:0; transform:translateY(10px); animation:fu .55s cubic-bezier(.16,1,.3,1) forwards; }
+    .d1{animation-delay:.03s}.d2{animation-delay:.09s}.d3{animation-delay:.15s}.d4{animation-delay:.21s}
+    .d5{animation-delay:.27s}.d6{animation-delay:.33s}.d7{animation-delay:.39s}
+    @keyframes fu{ to{opacity:1; transform:none;} }
+
+    /* canvas demo — node-by-node build, then a run pulse, then a soft wipe reset. 6s loop. */
+    .demo-curtain{ animation:demoCurtain 6s linear infinite; }
+    .demo-n1{ animation:demoN1 6s linear infinite; }
+    .demo-n2{ animation:demoN2 6s linear infinite; }
+    .demo-n3{ animation:demoN3 6s linear infinite; }
+    .demo-n4{ animation:demoN4 6s linear infinite; }
+    .demo-l1{ animation:demoL1 6s linear infinite; }
+    .demo-l2{ animation:demoL2 6s linear infinite; }
+    .demo-l3{ animation:demoL3 6s linear infinite; }
+
+    @keyframes demoCurtain{ 0%{opacity:1} 6%{opacity:0} 86%{opacity:0} 100%{opacity:1} }
+
+    @keyframes demoN1{
+      0%,8%{ opacity:0; transform:translateY(6px) scale(.95); box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      12%{ opacity:1; transform:none; }
+      67%{ box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      69%{ box-shadow:0 0 0 2px #22c55e, 0 0 10px rgba(34,197,94,.35); }
+      73%{ box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      100%{ opacity:1; }
+    }
+    @keyframes demoN2{
+      0%,24%{ opacity:0; transform:translateY(6px) scale(.95); box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      30%{ opacity:1; transform:none; }
+      71%{ box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      73%{ box-shadow:0 0 0 2px #22c55e, 0 0 10px rgba(34,197,94,.35); }
+      77%{ box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      100%{ opacity:1; }
+    }
+    @keyframes demoN3{
+      0%,40%{ opacity:0; transform:translateY(6px) scale(.95); box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      46%{ opacity:1; transform:none; }
+      75%{ box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      77%{ box-shadow:0 0 0 2px #22c55e, 0 0 10px rgba(34,197,94,.35); }
+      81%{ box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      100%{ opacity:1; }
+    }
+    @keyframes demoN4{
+      0%,56%{ opacity:0; transform:translateY(6px) scale(.95); box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      62%{ opacity:1; transform:none; }
+      79%{ box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      81%{ box-shadow:0 0 0 2px #22c55e, 0 0 10px rgba(34,197,94,.35); }
+      85%{ box-shadow:0 1px 2px rgba(0,0,0,.05); }
+      100%{ opacity:1; }
+    }
+    @keyframes demoL1{ 0%,14%{ stroke-dashoffset:150; opacity:0; } 15%{ opacity:1; } 22%{ stroke-dashoffset:0; } 100%{ stroke-dashoffset:0; opacity:1; } }
+    @keyframes demoL2{ 0%,32%{ stroke-dashoffset:150; opacity:0; } 33%{ opacity:1; } 38%{ stroke-dashoffset:0; } 100%{ stroke-dashoffset:0; opacity:1; } }
+    @keyframes demoL3{ 0%,48%{ stroke-dashoffset:150; opacity:0; } 49%{ opacity:1; } 54%{ stroke-dashoffset:0; } 100%{ stroke-dashoffset:0; opacity:1; } }
+  }
+
+  .foot-note{ max-width:1080px; margin:0 auto 40px; padding:0 clamp(14px,4vw,32px); color:var(--ink-soft);
+        font-size:13px; line-height:1.7; }
+  .foot-note b{ color:var(--ink); font-weight:600; }
+</style>
+
+<div class="wrap">
+  <div class="shell-note">
+    <div class="kick">Workdy · light mockup · English copy · matches app style</div>
+    <h1>Full review pass — integrations grid, trust pillars, and FAQ added</h1>
+    <p>Matches the app's light-mode tokens: white/grey surfaces, near-black text, black primary button. This pass adds the 3 blocks a top-tier landing page is expected to have: an integrations grid (2c), a 3-pillar "Stay in control" block extended with bring-your-own-API-key (10), and an FAQ (12b) — on top of the existing hero, count-up stats, live calculator, canvas demo, and pipeline cards.</p>
+  </div>
+
+  <div class="frame fade d1">
+    <nav class="top">
+      <span class="logo"><i></i> workdy</span>
+      <span class="nl">Features</span><span class="nl">Templates</span><span class="nl">Pricing</span>
+      <span class="sp"></span>
+      <span class="login">Log in</span>
+      <span class="btn-primary">Start free</span>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <div class="hero">
+      <div>
+        <span class="eyebrow"><i></i> AI workforce · POD</span>
+        <h2 class="headline">Hire <span class="accent">AI employees</span> for your POD store</h2>
+        <p class="sub">Research, ad videos, listings — your AI employees handle the repetitive work so you can focus on growth. Run 1 or 100, same effort.</p>
+        <div class="cta-row">
+          <span class="b1">Start free</span>
+          <span class="b2">See a real workflow run →</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="rh">Your team · running now</div>
+        <div class="row"><span class="dot pulse" style="background:var(--dot-ready)"></span><span class="rn">Niche Researcher</span><span class="rr">research</span><span class="rv">live</span></div>
+        <div class="row"><span class="dot" style="background:var(--cat-purple)"></span><span class="rn">Video Ad Maker</span><span class="rr">design</span><span class="rv" id="heroCounter">rendering 2/5</span></div>
+        <div class="row"><span class="dot" style="background:var(--dot-processing)"></span><span class="rn">Listing Writer</span><span class="rr">content</span><span class="rv" id="heroListings">142</span></div>
+        <div class="row"><span class="dot" style="background:var(--dot-idle)"></span><span class="rn">Support Agent</span><span class="rr">cs</span><span class="rv">idle</span></div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 2b: CAPABILITY STATS (count-up) ===== -->
+    <div class="statband" id="statband">
+      <div class="stat"><div class="num" data-to="30" data-suffix="+">0</div><div class="lab">built-in tools</div></div>
+      <div class="stat"><div class="num" data-to="19">0</div><div class="lab">workflow blocks</div></div>
+      <div class="stat"><div class="num" data-to="3">0</div><div class="lab">top AI models</div></div>
+      <div class="stat"><div class="num" data-to="6">0</div><div class="lab">ready-to-run templates</div></div>
+    </div>
+
+    <!-- ===== SECTION 2c: INTEGRATIONS GRID ===== -->
+    <div class="sect fade d2">
+      <div class="sect-head">
+        <div class="tag">Block 2c</div>
+        <h3>Connects with the tools you already use</h3>
+        <p>Google, TikTok Ads, WordPress, Slack, Notion, Telegram, GitHub — plus MCP and HTTP for everything else.</p>
+      </div>
+      <div class="int-grid">
+        <div class="int-tile"><span class="ic">G</span><span class="lb">Google</span></div>
+        <div class="int-tile"><span class="ic">TT</span><span class="lb">TikTok Ads</span></div>
+        <div class="int-tile"><span class="ic">W</span><span class="lb">WordPress</span></div>
+        <div class="int-tile"><span class="ic">S</span><span class="lb">Slack</span></div>
+        <div class="int-tile"><span class="ic">N</span><span class="lb">Notion</span></div>
+        <div class="int-tile"><span class="ic">T</span><span class="lb">Telegram</span></div>
+        <div class="int-tile"><span class="ic">GH</span><span class="lb">GitHub</span></div>
+        <div class="int-tile more"><span class="ic">+</span><span class="lb">MCP &amp; HTTP</span></div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 5: HOW IT WORKS + CANVAS DEMO ===== -->
+    <div class="sect fade d3" style="background:var(--bg-subtle);">
+      <div class="sect-head">
+        <div class="tag" style="color:var(--dot-processing);">Block 5</div>
+        <h3>How it works</h3>
+      </div>
+      <div class="hiw-grid">
+        <div class="hiw-steps">
+          <div class="hiw-step">
+            <span class="num">1</span>
+            <div><div class="tt">Hire an AI employee</div><div class="dd">Pick a role: Research, Design, Listings, or Support.</div></div>
+          </div>
+          <div class="hiw-step">
+            <span class="num">2</span>
+            <div><div class="tt">Connect it to a workflow</div><div class="dd">Drag and drop, or start from a template.</div></div>
+          </div>
+          <div class="hiw-step">
+            <span class="num">3</span>
+            <div><div class="tt">Let it run</div><div class="dd">On demand, on a schedule, or triggered by your store.</div></div>
+          </div>
+        </div>
+
+        <div class="demo-wrap">
+          <svg class="demo-svg" viewBox="0 0 640 190" preserveAspectRatio="none">
+            <path class="demo-l1" d="M130,136 C 158,136 158,50 185,50"></path>
+            <path class="demo-l2" d="M305,50 C 333,50 333,136 360,136"></path>
+            <path class="demo-l3" d="M480,136 C 500,136 500,50 520,50"></path>
+          </svg>
+          <div class="demo-node demo-n1" style="left:10px; top:110px;"><span class="k">Trigger</span><span class="n">New order</span></div>
+          <div class="demo-node demo-n2" style="left:185px; top:24px;"><span class="k">Tool</span><span class="n">Scan Market Demand</span></div>
+          <div class="demo-node demo-n3" style="left:360px; top:110px;"><span class="k">Tool</span><span class="n">Write Article</span></div>
+          <div class="demo-node demo-n4" style="left:520px; top:24px;"><span class="k">Action</span><span class="n">Publish</span></div>
+          <div class="demo-caption">Live canvas preview — loops automatically</div>
+          <div class="demo-curtain"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 4: SCALE ===== -->
+    <div class="sect fade d4">
+      <div class="sect-head">
+        <div class="tag">Block 4 · key feature</div>
+        <h3>Hiring people costs salary and time. AI employees: run 1 or 100, same effort.</h3>
+        <p>Design the workflow once — your AI employees repeat it endlessly, no extra work from you.</p>
+      </div>
+
+      <div class="scale-demo">
+        <div class="calc-label">
+          <span class="k">PRODUCTS / MONTH</span>
+          <span class="v"><span id="calcProducts">120</span> products</span>
+        </div>
+        <input class="calc-range" id="calcRange" type="range" min="10" max="500" step="10" value="120" aria-label="Products per month" />
+        <div class="scale-nums"><span>10</span><span>250</span><span>500</span></div>
+        <div class="calc-out">
+          <div class="calc-metric">
+            <div class="n" id="calcVideos">120</div>
+            <div class="l">listings &amp; videos your AI team makes</div>
+          </div>
+          <div class="calc-metric">
+            <div class="n" id="calcHours">24</div>
+            <div class="l">hours you save this month</div>
+            <div class="est">*Rough estimate, ~12 min saved per product.</div>
+          </div>
+        </div>
+        <span class="calc-badge">your effort: unchanged</span>
+      </div>
+
+      <div class="scale-points">
+        <div class="sp-card"><div class="t">Design it once</div><div class="d">Build the workflow once; your AI employees repeat it endlessly.</div></div>
+        <div class="sp-card"><div class="t">Change the input, not the effort</div><div class="d">100 more products isn't 100 more hours of work.</div></div>
+        <div class="sp-card"><div class="t">Runs while you sleep</div><div class="d">Trigger it on a schedule, via webhook, or through the API.</div></div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 6: USE-CASE PIPELINES ===== -->
+    <div class="sect fade d5" style="background:var(--bg-subtle);">
+      <div class="sect-head">
+        <div class="tag" style="color:var(--cat-blue);">Block 6 · key feature</div>
+        <h3>Pipelines built for POD sellers</h3>
+        <p>Four ready-made pipelines. Every step is a real tool inside Workdy — use it as is, no setup required.</p>
+      </div>
+
+      <div class="pl-grid">
+        <div class="pl-card">
+          <span class="cat" style="background:rgba(59,130,246,.1); color:var(--cat-blue);">Research</span>
+          <div class="t">Find a winning niche</div>
+          <div class="d">Spot demand, size up competitors, get a decision-ready report in minutes.</div>
+          <div class="pl-steps">
+            <span class="chip">Scan Market Demand</span><span class="chip">Detect Competitors</span><span class="chip">Company Deep Dive</span>
+          </div>
+          <span class="use">Use this template →</span>
+        </div>
+        <div class="pl-card">
+          <span class="cat" style="background:rgba(139,92,246,.1); color:var(--cat-purple);">Creative</span>
+          <div class="t">Produce an ad video</div>
+          <div class="d">From product photos to a finished ad video — no manual editing.</div>
+          <div class="pl-steps">
+            <span class="chip">Analyze Product Images</span><span class="chip">Find Creative Angle</span><span class="chip">Generate Video</span>
+          </div>
+          <span class="use">Use this template →</span>
+        </div>
+        <div class="pl-card">
+          <span class="cat" style="background:rgba(245,158,11,.12); color:#b45309;">Content</span>
+          <div class="t">Write listings at scale</div>
+          <div class="d">Titles, descriptions, and tags for hundreds of products, with a review step before anything goes live.</div>
+          <div class="pl-steps">
+            <span class="chip">Keyword Research</span><span class="chip">Write Article</span><span class="chip">Human review</span><span class="chip">Publish</span>
+          </div>
+          <span class="use">Use this template →</span>
+        </div>
+        <div class="pl-card">
+          <span class="cat" style="background:rgba(34,197,94,.1); color:#15803d;">Ads</span>
+          <div class="t">Run and optimize ads</div>
+          <div class="d">Sync campaign performance and get an automatic daily report.</div>
+          <div class="pl-steps">
+            <span class="chip">TikTok Campaigns</span><span class="chip">Ads Performance Sync</span><span class="chip">Report</span>
+          </div>
+          <span class="use">Use this template →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 10: STAY IN CONTROL (3 pillars) ===== -->
+    <div class="sect fade d6">
+      <div class="sect-head">
+        <div class="tag">Block 10</div>
+        <h3>Stay in control</h3>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <span class="ic">✓</span>
+          <div class="t">Human review</div>
+          <div class="d">Approve before anything goes live, with custom review forms.</div>
+        </div>
+        <div class="trust-card">
+          <span class="ic">◆</span>
+          <div class="t">AI Copilot</div>
+          <div class="d">Flags workflow errors and points you straight to the node that needs fixing.</div>
+        </div>
+        <div class="trust-card">
+          <span class="ic">🔑</span>
+          <div class="t">Bring your own API key</div>
+          <div class="d">Connect your own OpenAI, Anthropic, or Gemini key. You control which model runs — never locked into one provider.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 12b: FAQ ===== -->
+    <div class="sect fade d7" style="background:var(--bg-subtle);">
+      <div class="sect-head">
+        <div class="tag">Block 12b</div>
+        <h3>Frequently asked questions</h3>
+      </div>
+      <div class="faq">
+        <details class="faq-item" open>
+          <summary>Do I need to know how to code? <span class="chev">▾</span></summary>
+          <div class="a">No. Hire an AI employee, pick a template, and connect it with drag and drop. HTTP, JavaScript, and MCP are there if you want to go further.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What AI models does Workdy use? <span class="chev">▾</span></summary>
+          <div class="a">GPT-4o, Claude, and Gemini — pick per employee, or bring your own API key.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How is this different from Zapier or n8n? <span class="chev">▾</span></summary>
+          <div class="a">Those are general automation tools. Workdy comes with AI employees and ready-to-run pipelines built for POD sellers — niche research, ad videos, listings, and ads — so you're not starting from a blank canvas.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I review what my AI employees do before it goes live? <span class="chev">▾</span></summary>
+          <div class="a">Yes. Add a human review step to any workflow — nothing publishes without your approval.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I connect Workdy to my own tools? <span class="chev">▾</span></summary>
+          <div class="a">Yes — Google, TikTok Ads, WordPress, Slack, Notion, and Telegram are built in. For anything else, use HTTP, JavaScript, or your own MCP server.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What does it cost? <span class="chev">▾</span></summary>
+          <div class="a">Start free. Upgrade when you need to.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot-note">
+    <p><b>Ghi chú (nội bộ, không lên trang):</b> font hệ thống dùng làm placeholder hiển thị (chốt xong nâng lên Inter qua next/font). Màu category (xanh dương/tím/amber/xanh lá) chỉ bám vào tag &amp; chip — nếu muốn ít màu hơn nữa, có thể gộp về 1–2 tông duy nhất cho category thay vì 4. Mọi copy trong khung mock ở trên đã là tiếng Anh cuối cùng.</p>
+    <p><b>Về demo canvas (Block 5):</b> animation này tự dựng bằng CSS/SVG (node xuất hiện → dây nối vẽ ra → chạy pulse xanh lá theo thứ tự → wipe reset), loop 6 giây, tôn trọng <code>prefers-reduced-motion</code>. Đây là bản tạm — khi có video quay màn hình canvas thật của app (kéo node, nối dây, bấm chạy), nên thay bằng video/GIF thật, chân thực hơn nhiều. Chi tiết ở khối 5 trong <code>03-landing-spec.md</code>.</p>
+    <p><b>Về số liệu:</b> dải <b>4 con số</b> (30+ tools, 19 blocks, 3 models, 6 templates) là <b>số thật kiểm chứng được</b>, đếm tăng khi cuộn tới. Bộ <b>calculator</b> ở Block 4 là <b>ước tính do bạn nhập</b> (có nhãn *estimate*), KHÔNG phải traction bịa. Số traction thật (user, doanh thu…) để trống, gắn sau khi release.</p>
+    <p><b>3 khối mới (2c, 10, 12b):</b> lưới tích hợp <b>chỉ liệt kê integration đã verify</b> (Google, TikTok Ads, WordPress, Slack, Notion, Telegram, GitHub) — <b>KHÔNG có Shopify</b> vì chưa xác nhận có connector thật, chỉ mới xuất hiện trong tên 1 template. "Bring your own API key" ở Block 10 chỉ nói kiểm soát provider/chi phí, không claim gì về nơi lưu dữ liệu. FAQ dùng accordion (<code>&lt;details&gt;</code>), không cần JS.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animateNumber(el, to, suffix, dur){
+    suffix = suffix || '';
+    if(reduce){ el.textContent = to + suffix; return; }
+    var start = 0, t0 = null;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(start + (to - start) * eased) + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // 1) Capability stats — count up once when scrolled into view
+  var band = document.getElementById('statband');
+  if(band){
+    var fired = false;
+    function runStats(){
+      if(fired) return; fired = true;
+      band.querySelectorAll('.num').forEach(function(el){
+        animateNumber(el, parseInt(el.getAttribute('data-to'), 10), el.getAttribute('data-suffix') || '', 1100);
+      });
+    }
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting) runStats(); });
+      }, { threshold: 0.4 });
+      io.observe(band);
+    } else { runStats(); }
+  }
+
+  // 2) Scale calculator — live numbers as you drag
+  var range = document.getElementById('calcRange');
+  var pOut = document.getElementById('calcProducts');
+  var vOut = document.getElementById('calcVideos');
+  var hOut = document.getElementById('calcHours');
+  function updateCalc(){
+    var n = parseInt(range.value, 10);
+    pOut.textContent = n;
+    vOut.textContent = n;
+    hOut.textContent = Math.round(n * 12 / 60);
+  }
+  if(range){ range.addEventListener('input', updateCalc); updateCalc(); }
+
+  // 3) Hero roster — gentle live tick (illustrative), skip if reduced motion
+  var listings = document.getElementById('heroListings');
+  if(listings && !reduce){
+    var val = 142;
+    setInterval(function(){ val += 1 + Math.floor(Math.random() * 2); listings.textContent = val; }, 3200);
+  }
+})();
+</script>

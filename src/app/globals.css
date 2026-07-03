@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-base: #ffffff;
+  --color-subtle: #f9fafb;
+  --color-muted: #f3f4f6;
+  --color-page: #eff2f6;
+
+  --color-ink: #111827;
+  --color-ink-soft: #6b7280;
+  --color-ink-faint: #9ca3af;
+
+  --color-line: #e5e7eb;
+  --color-line-subtle: #f0f0f0;
+
+  --color-link: #4f46e5;
+  --color-link-hover: #4338ca;
+
+  --color-dot-ready: #22c55e;
+  --color-dot-processing: #eab308;
+  --color-dot-error: #ef4444;
+  --color-dot-idle: #9ca3af;
+
+  --color-cat-red: #ef4444;
+  --color-cat-blue: #3b82f6;
+  --color-cat-purple: #8b5cf6;
+  --color-cat-amber: #f59e0b;
+  --color-cat-green: #22c55e;
+  --color-cat-pink: #ec4899;
+
+  --color-dark-page: #0f0f1e;
+  --color-dark-card: #1a1a2e;
+  --color-dark-elev: #1e1e36;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-base: var(--color-base);
+  --color-subtle: var(--color-subtle);
+  --color-muted: var(--color-muted);
+  --color-page: var(--color-page);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-faint: var(--color-ink-faint);
+
+  --color-line: var(--color-line);
+  --color-line-subtle: var(--color-line-subtle);
+
+  --color-link: var(--color-link);
+  --color-link-hover: var(--color-link-hover);
+
+  --color-dot-ready: var(--color-dot-ready);
+  --color-dot-processing: var(--color-dot-processing);
+  --color-dot-error: var(--color-dot-error);
+  --color-dot-idle: var(--color-dot-idle);
+
+  --color-cat-red: var(--color-cat-red);
+  --color-cat-blue: var(--color-cat-blue);
+  --color-cat-purple: var(--color-cat-purple);
+  --color-cat-amber: var(--color-cat-amber);
+  --color-cat-green: var(--color-cat-green);
+  --color-cat-pink: var(--color-cat-pink);
+
+  --color-dark-page: var(--color-dark-page);
+  --color-dark-card: var(--color-dark-card);
+  --color-dark-elev: var(--color-dark-elev);
+
+  --font-sans: var(--font-inter);
+
+  --animate-fade-in: fade-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-card-entrance: card-entrance 350ms cubic-bezier(0.21, 1.02, 0.43, 1.01) forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes card-entrance {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-base);
+  color: var(--color-ink);
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes demo-node {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.95);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  25% {
+    opacity: 1;
+    transform: none;
+  }
+  60% {
+    box-shadow: 0 0 0 2px #22c55e, 0 0 10px rgba(34, 197, 94, 0.35);
+  }
+  85% {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+@keyframes demo-line {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 150;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
