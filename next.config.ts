@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   images: {
-    formats: ["image/avif", "image/webp"],
+    // AVIF encoding hangs in this Next build's image optimizer, which stalls
+    // every next/image request (browsers request AVIF first). WebP only.
+    formats: ["image/webp"],
   },
   turbopack: {
     root: __dirname,

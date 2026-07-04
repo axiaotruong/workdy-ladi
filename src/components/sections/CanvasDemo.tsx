@@ -1,73 +1,63 @@
 "use client";
 
-import { useInView } from "@/lib/useInView";
+import { UserPlus, Workflow, Play } from "lucide-react";
+
+const VB_W = 560;
+const VB_H = 200;
+const NODE_W = 150;
+const NODE_H = 64;
 
 const nodes = [
-  { kind: "Trigger", name: "New order", left: "1.5%", top: "58%", delay: "0s" },
-  { kind: "Tool", name: "Scan Market Demand", left: "29%", top: "12.5%", delay: "0.5s" },
-  { kind: "Tool", name: "Write Article", left: "56%", top: "58%", delay: "1s" },
-  { kind: "Action", name: "Publish", left: "81%", top: "12.5%", delay: "1.5s" },
+  { kind: "Agent", name: "Niche Researcher", icon: UserPlus, cx: 95, cy: 100, delay: 0 },
+  { kind: "Workflow", name: "Find a winning niche", icon: Workflow, cx: 285, cy: 100, delay: 1.8 },
+  { kind: "Run", name: "Publish report", icon: Play, cx: 475, cy: 100, delay: 3.6 },
 ];
 
-const paths = [
-  { d: "M130,136 C158,136 158,50 185,50", delay: "0.35s" },
-  { d: "M305,50 C333,50 333,136 360,136", delay: "0.85s" },
-  { d: "M480,136 C500,136 500,50 520,50", delay: "1.35s" },
-];
+const edges = ["M170,100 L210,100", "M360,100 L400,100"];
+
+const pct = (v: number, total: number) => `${(v / total) * 100}%`;
 
 export function CanvasDemo() {
-  const { ref, inView } = useInView<HTMLDivElement>(0.5);
-
   return (
-    <div
-      ref={ref}
-      className="relative aspect-[640/190] w-full min-h-[150px] max-w-xl overflow-hidden rounded-2xl border border-line bg-base"
-    >
-      <svg
-        className="absolute inset-0 h-full w-full"
-        viewBox="0 0 640 190"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        {paths.map((path) => (
-          <path
-            key={path.d}
-            d={path.d}
-            fill="none"
-            stroke="var(--color-line)"
-            strokeWidth={2}
-            strokeDasharray={150}
-            style={
-              inView
-                ? { animation: `demo-line 0.6s ease-out ${path.delay} both` }
-                : { strokeDashoffset: 150, opacity: 0 }
-            }
-          />
+    <div className="bg-dot-grid relative aspect-[560/200] w-full overflow-hidden rounded-2xl border border-line bg-base shadow-[0_1px_2px_rgba(17,24,39,0.05),0_20px_40px_-24px_rgba(17,24,39,0.25)]">
+      <div className="absolute left-3.5 top-3 z-10 flex items-center gap-1.5 font-mono text-[10px] tracking-wide text-ink-faint uppercase">
+        <span className="size-1.5 rounded-full bg-dot-ready" />
+        live canvas
+      </div>
+
+      <svg className="absolute inset-0 h-full w-full" viewBox={`0 0 ${VB_W} ${VB_H}`} fill="none" aria-hidden="true">
+        {edges.map((d) => (
+          <g key={d}>
+            <path d={d} stroke="var(--color-line)" strokeWidth={2} />
+            <path d={d} className="edge-flow" stroke="var(--color-dot-ready)" strokeWidth={2} strokeLinecap="round" />
+          </g>
         ))}
       </svg>
 
-      {nodes.map((node) => (
-        <div
-          key={node.name}
-          className="absolute flex h-[27%] w-[19%] min-w-[92px] flex-col items-center justify-center rounded-[10px] border border-line bg-base px-2 text-center shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
-          style={{
-            left: node.left,
-            top: node.top,
-            ...(inView
-              ? { animation: `demo-node 1s ease-out ${node.delay} both` }
-              : { opacity: 0 }),
-          }}
-        >
-          <span className="font-mono text-[8.5px] tracking-wide text-ink-faint uppercase">
-            {node.kind}
-          </span>
-          <span className="text-[11px] leading-tight font-semibold text-ink">{node.name}</span>
-        </div>
-      ))}
-
-      <span className="absolute bottom-2.5 left-3.5 font-mono text-[10px] tracking-wide text-ink-faint uppercase">
-        Live canvas preview
-      </span>
+      {nodes.map((node) => {
+        const Icon = node.icon;
+        return (
+          <div
+            key={node.name}
+            className="run-node absolute flex flex-col justify-center rounded-xl border border-line bg-base px-3 shadow-[0_1px_2px_rgba(17,24,39,0.06)]"
+            style={{
+              left: pct(node.cx - NODE_W / 2, VB_W),
+              top: pct(node.cy - NODE_H / 2, VB_H),
+              width: pct(NODE_W, VB_W),
+              height: pct(NODE_H, VB_H),
+              animationDelay: `${node.delay}s`,
+            }}
+          >
+            <div className="flex items-center gap-2">
+              <span className="flex size-6 flex-none items-center justify-center rounded-md bg-muted text-ink-soft">
+                <Icon size={13} strokeWidth={2} />
+              </span>
+              <span className="font-mono text-[8.5px] tracking-wide text-ink-faint uppercase">{node.kind}</span>
+            </div>
+            <div className="mt-1 truncate text-[11.5px] font-semibold text-ink">{node.name}</div>
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -138,10 +138,27 @@ Small/label:    13px · weight 500
 
 - Radius: card `12px`, nút `8–10px`, pill `9999px`. Ảnh/mockup bo `0.75rem`.
 
-## Logo
+## Logo & favicon (file thật đã kèm trong `../assets/`)
 
-- Landing nền sáng → dùng logo bản **tối** (chữ đậm). Section navy (nếu có) dùng bản trắng.
-- Wordmark hiện base64 trong `public/og-preview.html`. Nên xin file gốc SVG (cả 2 biến thể).
+> ⚠️ **Quy ước đặt tên (đã verify qua code app, dễ hiểu ngược):** hậu tố `-dark`/`-light`
+> chỉ **nền mà logo được thiết kế để đặt lên**, KHÔNG phải màu bản thân logo.
+> `AgentLayout.tsx` dùng `logo-light.png` ở light mode, `logo-dark.png` ở dark mode;
+> `Login.tsx` (nền tối `GalaxyCanvas`) dùng `logo-dark.png`. Tức: **`logo-light.png` là
+> logo màu TỐI** (đọc được trên nền trắng) — **`logo-dark.png` là logo màu SÁNG** (đọc
+> được trên nền tối). Dễ tưởng ngược nếu chỉ đọc tên file.
+
+- **Header / footer (nền sáng, mặc định của landing):** `logo-light.png` (200×40, logo màu tối).
+- **Favicon:** `favicon.png` (32×32) — app đang dùng chính file này.
+- **Chỗ hẹp / icon-only (nền sáng):** `logo-icon-light.png` (128×128, icon màu tối).
+- **Section nền tối (nếu dùng — xem brand-kit phần "section nền tối"):** `logo-dark.png`
+  (200×40) hoặc `logo-icon-dark.png` (128×128, icon màu sáng).
+- **App/social square lớn (512×512):** ❌ KHÔNG có — file `logo.png` gốc trong `public/`
+  của app thực ra là brand **"SEODY"** (dự án/tên khác), đã bị loại khỏi `assets/`, đừng
+  dùng lại nếu thấy ở đâu đó trong repo app. Nếu cần icon vuông lớn, tạm dùng
+  `logo-icon-light.png` (128×128, chỉ có icon không chữ) hoặc xin bản gốc từ chủ dự án.
+- **OG image:** `og-image.png` (1200×630) — đã render lại đúng logo (`logo-light.png`),
+  tông light + copy EN "Hire AI employees for your POD store", dùng được luôn.
+- Tất cả là PNG; muốn nét ở mọi kích thước thì xin thêm bản **SVG** (tùy chọn).
 
 ## Tailwind config (dán vào `tailwind.config.ts`)
 

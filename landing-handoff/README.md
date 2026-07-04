@@ -16,11 +16,12 @@ thương hiệu và bố cục landing, mà không cần truy cập vào repo ap
 | [`docs/03-landing-spec.md`](docs/03-landing-spec.md) | Bố cục landing từng section + copy + map vào tính năng THẬT của app |
 | [`docs/04-nextjs-setup.md`](docs/04-nextjs-setup.md) | Cấu trúc thư mục Next.js đề xuất + danh sách component + checklist SEO |
 | [`mockup-reference.html`](mockup-reference.html) | **Bản xem trực quan** (mở bằng trình duyệt) — layout, style, motion; có sẵn CSS/JS (count-up, calculator, canvas demo, FAQ) để lấy lại. ⚠️ Chỉ tham khảo — `03-landing-spec.md` mới là chuẩn về bố cục & copy. |
+| [`assets/`](assets/) | Logo + favicon thật lấy từ app. ⚠️ Tên file theo **nền mà logo được thiết kế để đặt lên**, không phải màu bản thân logo — nền sáng (header/footer trắng) dùng `logo-light.png` (logo màu tối) + `favicon.png`; `logo-icon-light.png` cho chỗ hẹp; `logo-dark.png`/`logo-icon-dark.png` (logo màu sáng) dành cho section nền tối. `og-image.png` (1200×630) đã làm lại đúng logo, dùng luôn. |
 
 ## Nguồn gốc dữ liệu (để đối chiếu, KHÔNG cần copy sang)
 
 - Design tokens thật: `frontend/globals.css` trong repo app (`:root` = light mode)
-- Logo wordmark: `public/og-preview.html` (base64 — nên xin file gốc SVG)
+- Logo/favicon/OG image thật: `public/` trong repo app — đã copy sẵn vào `assets/` (xem trên)
 - Danh sách tính năng: khảo sát toàn bộ `frontend/modules` + `backend/modules`
 
 ## Lưu ý quan trọng

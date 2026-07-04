@@ -1,4 +1,7 @@
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ChevronDown } from "lucide-react";
+import { Section } from "@/components/ui/Section";
+import { Reveal } from "@/components/ui/Reveal";
+import { siteConfig } from "@/config/site";
 
 const faqs = [
   {
@@ -39,31 +42,53 @@ const jsonLd = {
 
 export function FAQ() {
   return (
-    <section id="faq" className="border-t border-line-subtle bg-subtle px-6 py-16 sm:px-8 sm:py-20">
+    <Section id="faq" bg="subtle">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <SectionHeading title="Frequently asked questions" />
+      <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <Reveal>
+          <div className="lg:sticky lg:top-28">
+            <span className="inline-flex items-center rounded-full bg-base px-3 py-1 text-[11px] font-semibold tracking-wide text-ink-soft uppercase ring-1 ring-inset ring-line">
+              FAQ
+            </span>
+            <h2 className="mt-4 text-[clamp(1.75rem,4vw,2.5rem)] leading-tight font-bold tracking-tight text-ink">
+              Frequently asked questions
+            </h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
+              Still have a question?{" "}
+              <a href={`${siteConfig.appUrl}`} className="font-semibold text-ink underline underline-offset-4 hover:text-link">
+                Start free
+              </a>{" "}
+              and see for yourself.
+            </p>
+          </div>
+        </Reveal>
 
-      <div className="mx-auto mt-10 flex max-w-2xl flex-col gap-2.5">
-        {faqs.map((faq, index) => (
-          <details
-            key={faq.q}
-            className="group rounded-xl border border-line bg-base"
-            open={index === 0}
-          >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-[14px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
-              {faq.q}
-              <span className="flex-none text-xs text-ink-faint transition-transform duration-150 group-open:rotate-180">
-                ▾
-              </span>
-            </summary>
-            <p className="px-5 pb-5 text-[13.5px] leading-relaxed text-ink-soft">{faq.a}</p>
-          </details>
-        ))}
+        <Reveal delay={0.1}>
+          <div className="flex flex-col gap-3">
+            {faqs.map((faq, index) => (
+              <details
+                key={faq.q}
+                className="group rounded-2xl border border-line bg-base transition-colors hover:border-ink-faint/50"
+                open={index === 0}
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-[14.5px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                  {faq.q}
+                  <ChevronDown
+                    size={17}
+                    className="flex-none text-ink-faint transition-transform duration-200 group-open:rotate-180"
+                    strokeWidth={2.2}
+                  />
+                </summary>
+                <p className="px-5 pb-5 text-[13.5px] leading-relaxed text-ink-soft">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

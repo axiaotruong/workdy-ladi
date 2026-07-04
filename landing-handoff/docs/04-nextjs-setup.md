@@ -45,8 +45,9 @@ workdy-landing/
 │     ├─ PipelineCard.tsx      # category tag + chip bước → dùng ở §6
 │     └─ Button.tsx            # primary (đen, giống app) / secondary (viền)
 ├─ public/
-│  ├─ logo.svg                 # xin file gốc SVG (bản tối cho nền sáng); tạm extract từ og-preview.html
-│  ├─ og.png                   # ảnh OG/social share
+│  ├─ logo-light.png           # header/footer (nền sáng) — ⚠️ tên ngược trực giác, xem 02-brand-kit.md
+│  ├─ favicon.png / logo-icon-light.png / logo-dark.png / ...  # còn lại copy nguyên từ ../assets/
+│  ├─ og-image.png             # copy từ ../assets/og-image.png — đã render đúng logo, dùng luôn
 │  └─ demos/                   # GIF/video pipeline chạy thật (chụp từ app)
 ├─ tailwind.config.ts          # dán từ 02-brand-kit.md
 └─ next.config.js
@@ -65,10 +66,10 @@ workdy-landing/
 
 - `metadata`: title, description theo brief (`01-project-brief.md`). **`lang="en"`** —
   toàn bộ landing là tiếng Anh, không cần route ngôn ngữ khác ở bản đầu.
-- OG/Twitter tags — làm mới `og.png` theo copy tiếng Anh + hệ màu light (khác bản OG cũ
-  nền đen/tím trong `public/og-preview.html` của app — bản đó chỉ tham khảo bố cục, không
-  dùng nguyên màu). **Nhớ dùng absolute URL cho `og:image`** (commit gần đây của app đã
-  sửa lỗi Facebook crawler không resolve được URL tương đối — áp dụng bài học tương tự ở đây).
+- OG/Twitter tags — dùng `og-image.png` từ `../assets/` (đã làm bản light, copy tiếng Anh
+  "Hire AI employees for your POD store", không cần làm lại). **Nhớ dùng absolute URL cho
+  `og:image`** (commit gần đây của app đã sửa lỗi Facebook crawler không resolve được URL
+  tương đối — áp dụng bài học tương tự ở đây).
 - `sitemap.xml` + `robots.txt` (Next.js `app/sitemap.ts`, `app/robots.ts`).
 - JSON-LD `SoftwareApplication` schema (tăng rich result).
 - `next/image` cho mọi ảnh; `priority` cho ảnh hero.

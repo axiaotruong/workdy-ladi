@@ -1,19 +1,25 @@
-import { FeatureCard } from "@/components/ui/FeatureCard";
+import { ShieldCheck, Radar, KeyRound } from "lucide-react";
+import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Stagger, StaggerItem } from "@/components/ui/Reveal";
 
 const pillars = [
   {
-    icon: "✓",
+    icon: ShieldCheck,
+    accent: "green" as const,
     title: "Human review",
     description: "Approve before anything goes live, with custom review forms.",
   },
   {
-    icon: "◆",
+    icon: Radar,
+    accent: "blue" as const,
     title: "AI Copilot",
     description: "Flags workflow errors and points you straight to the node that needs fixing.",
   },
   {
-    icon: "🔑",
+    icon: KeyRound,
+    accent: "amber" as const,
     title: "Bring your own API key",
     description:
       "Connect your own OpenAI, Anthropic, or Gemini key. You control which model runs — never locked into one provider.",
@@ -22,14 +28,20 @@ const pillars = [
 
 export function BuiltForTrust() {
   return (
-    <section className="border-t border-line-subtle bg-subtle px-6 py-16 sm:px-8 sm:py-20">
-      <SectionHeading title="Stay in control" />
+    <Section>
+      <SectionHeading
+        eyebrow="Peace of mind"
+        title="Stay in control"
+        description="You hand off the busywork — not the decisions. Workdy keeps you in the loop at every step."
+      />
 
-      <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-3">
+      <Stagger className="mt-12 grid gap-5 sm:grid-cols-3">
         {pillars.map((pillar) => (
-          <FeatureCard key={pillar.title} {...pillar} />
+          <StaggerItem key={pillar.title}>
+            <FeatureCard {...pillar} className="h-full" />
+          </StaggerItem>
         ))}
-      </div>
-    </section>
+      </Stagger>
+    </Section>
   );
 }

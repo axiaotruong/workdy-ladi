@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 type ButtonProps = {
   href: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "invert";
   size?: "md" | "sm";
   children: ReactNode;
   className?: string;
@@ -21,6 +21,7 @@ const variants = {
   primary: "bg-ink text-white hover:bg-ink/85",
   secondary:
     "bg-base text-ink border border-line font-medium hover:border-ink-faint",
+  invert: "bg-white text-ink hover:bg-white/90",
 };
 
 export function Button({
