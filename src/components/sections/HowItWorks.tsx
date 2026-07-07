@@ -1,4 +1,4 @@
-import { UserPlus, Workflow, Play } from "lucide-react";
+import { Lightbulb, Wand2, Play } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { IconTile } from "@/components/ui/IconTile";
@@ -7,22 +7,22 @@ import { CanvasDemo } from "@/components/sections/CanvasDemo";
 
 const steps = [
   {
-    icon: UserPlus,
-    accent: "blue" as const,
-    title: "Hire an AI employee",
-    description: "Pick a role: Research, Design, Listings, or Support.",
+    icon: Lightbulb,
+    accent: "ink" as const,
+    title: "Start from a pipeline or your own idea",
+    description: "Pick a ready-made pipeline, or just describe the job in plain words.",
   },
   {
-    icon: Workflow,
-    accent: "purple" as const,
-    title: "Connect it to a workflow",
-    description: "Drag and drop, or start from a template.",
+    icon: Wand2,
+    accent: "ink" as const,
+    title: "Generate the workflow with AI",
+    description: "AI drafts a step-by-step plan — review it, then apply it to the canvas.",
   },
   {
     icon: Play,
-    accent: "amber" as const,
-    title: "Let it run",
-    description: "On demand, on a schedule, or triggered by your store.",
+    accent: "ink" as const,
+    title: "Run it and use the output",
+    description: "On demand, on a schedule, or via webhook. Get reports, listings, or send results anywhere.",
   },
 ];
 
@@ -32,7 +32,7 @@ export function HowItWorks() {
       <SectionHeading
         eyebrow="How it works"
         title="From idea to running workflow in 3 steps"
-        description="No code. Just describe the job, connect the steps, and let your AI team run it."
+        description="No code. Just describe the job, connect the steps, and let your AI assistant run it."
       />
 
       <div className="mt-12 grid items-center gap-12 lg:grid-cols-2">

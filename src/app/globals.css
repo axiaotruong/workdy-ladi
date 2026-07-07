@@ -245,6 +245,73 @@ body {
   stroke-dasharray: 4 6;
   animation: edge-flow 0.9s linear infinite;
 }
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes caret-blink {
+  50% {
+    border-color: transparent;
+  }
+}
+.typewriter {
+  display: inline-block;
+  width: 0;
+  border-right: 2px solid rgba(255, 255, 255, 0.6);
+  animation:
+    typewriter 1.3s steps(var(--chars, 30), end) 0.2s forwards,
+    caret-blink 0.8s step-end infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-to-check-out {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  78%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes spin-to-check-in {
+  0%,
+  70% {
+    opacity: 0;
+  }
+  78%,
+  100% {
+    opacity: 1;
+  }
+}
+.spin-to-check-out {
+  animation: spin-slow 0.8s linear infinite, spin-to-check-out 2.6s ease forwards;
+}
+.spin-to-check-in {
+  animation: spin-to-check-in 2.6s ease forwards;
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.progress-x {
+  transform-origin: left;
+  animation: grow-x linear forwards;
+}
+
 @keyframes waveform {
   0%,
   100% {

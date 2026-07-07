@@ -26,31 +26,21 @@ type Accent = {
   ring: string; // app frame accent border
 };
 
+// One accent (violet) across all three capabilities — categories are told
+// apart by icon + label, keeping the page neutral-first, not multi-hued.
+const violetAccent: Accent = {
+  dot: "bg-violet-500/12 text-violet-600",
+  chip: "border-violet-500/30 bg-violet-500/10 text-violet-600",
+  bar: "bg-violet-500",
+  note: "text-violet-600",
+  hl: "bg-violet-500/15 text-violet-600",
+  ring: "border-violet-500/30",
+};
+
 const accents: Record<Key, Accent> = {
-  kb: {
-    dot: "bg-blue-500/12 text-blue-600",
-    chip: "border-blue-500/30 bg-blue-500/10 text-blue-600",
-    bar: "bg-blue-500",
-    note: "text-blue-600",
-    hl: "bg-blue-500/15 text-blue-600",
-    ring: "border-blue-500/30",
-  },
-  voice: {
-    dot: "bg-violet-500/12 text-violet-600",
-    chip: "border-violet-500/30 bg-violet-500/10 text-violet-600",
-    bar: "bg-violet-500",
-    note: "text-violet-600",
-    hl: "bg-violet-500/15 text-violet-600",
-    ring: "border-violet-500/30",
-  },
-  mem: {
-    dot: "bg-green-500/12 text-green-600",
-    chip: "border-green-500/30 bg-green-500/10 text-green-600",
-    bar: "bg-green-500",
-    note: "text-green-600",
-    hl: "bg-green-500/15 text-green-600",
-    ring: "border-green-500/30",
-  },
+  kb: violetAccent,
+  voice: violetAccent,
+  mem: violetAccent,
 };
 
 const capabilities: { key: Key; icon: LucideIcon; title: string; description: string }[] = [

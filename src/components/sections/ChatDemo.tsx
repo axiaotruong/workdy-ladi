@@ -129,7 +129,7 @@ export function ChatDemo() {
 
       {/* coming soon chip — Lark (per handoff: not yet live) */}
       <div className="animate-float-slow absolute -bottom-4 -left-3 flex items-center gap-1.5 rounded-full border border-line bg-base/95 px-3 py-1.5 text-[11px] font-medium text-ink-soft shadow-[0_12px_30px_-14px_rgba(17,24,39,0.4)] backdrop-blur sm:-left-6">
-        <Sparkles size={12} className="text-cat-amber" />
+        <Sparkles size={12} className="text-ink-faint" />
         Lark &amp; web widget — coming soon
       </div>
     </div>
