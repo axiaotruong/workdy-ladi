@@ -36,7 +36,7 @@ export function HowItWorks() {
       />
 
       <div className="mt-12 grid items-center gap-12 lg:grid-cols-2">
-        <ol className="relative flex flex-col gap-8">
+        <ol className="relative flex flex-col gap-8 lg:order-2">
           <span className="absolute left-5 top-3 bottom-3 w-px bg-line" aria-hidden="true" />
           {steps.map((step, index) => (
             <Reveal as="li" key={step.title} delay={index * 0.08} className="relative flex gap-4">
@@ -58,7 +58,7 @@ export function HowItWorks() {
           ))}
         </ol>
 
-        <Reveal delay={0.1}>
+        <Reveal delay={0.1} className="lg:order-1">
           <CanvasDemo />
         </Reveal>
       </div>

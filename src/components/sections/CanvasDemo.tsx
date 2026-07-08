@@ -86,7 +86,7 @@ export function CanvasDemo() {
   const canvasVisible = phase === "canvas" || phase === "toast";
 
   return (
-    <div className="relative aspect-[560/340] w-full overflow-hidden rounded-2xl border border-line bg-base shadow-[0_1px_2px_rgba(17,24,39,0.05),0_30px_60px_-30px_rgba(17,24,39,0.35)]">
+    <div className="relative aspect-[5/6] w-full overflow-hidden rounded-2xl border border-line bg-base shadow-[0_1px_2px_rgba(17,24,39,0.05),0_30px_60px_-30px_rgba(17,24,39,0.35)] sm:aspect-[560/340]">
       {/* faded dot grid + soft ambient glow */}
       <div className="bg-dot-grid mask-radial-fade pointer-events-none absolute inset-0" aria-hidden="true" />
       <div

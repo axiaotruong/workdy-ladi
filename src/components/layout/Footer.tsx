@@ -28,8 +28,8 @@ export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-dark-page text-white">
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
-        <div className="grid gap-12 sm:grid-cols-[1.6fr_1fr_1fr]">
-          <div>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-[1.6fr_1fr_1fr] sm:gap-12">
+          <div className="col-span-2 sm:col-span-1">
             <Image src="/logo-on-dark.png" alt={siteConfig.name} width={140} height={28} />
             <p className="mt-4 max-w-sm text-[13.5px] leading-relaxed text-white/55">
               AI employees for POD sellers — research, ad videos, and listings, handled by a team

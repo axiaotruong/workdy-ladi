@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Search,
   Clapperboard,
@@ -17,7 +17,6 @@ import {
   BarChart3,
   FileText,
   ArrowRight,
-  ChevronRight,
   type LucideIcon,
 } from "lucide-react";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
@@ -98,6 +97,34 @@ const softStyle = (color: string) => ({
   color,
   backgroundColor: `color-mix(in srgb, ${color} 12%, transparent)`,
 });
+
+// Mini node-canvas geometry (mirrors the real workflow builder): nodes laid out
+// in a zig-zag and joined by curved connectors, sized in a virtual viewBox that
+// the SVG stretches to fill the panel.
+const VB_W = 600;
+const VB_H = 230;
+const NODE_W = 190;
+const NODE_H = 58;
+const Y_TOP = 74;
+const Y_BOT = 156;
+const START_X = 104;
+
+const pct = (v: number, total: number) => `${(v / total) * 100}%`;
+
+function layoutNodes(count: number) {
+  const dx = count > 1 ? (VB_W - 2 * START_X) / (count - 1) : 0;
+  const nodes = Array.from({ length: count }, (_, i) => ({
+    cx: START_X + i * dx,
+    cy: i % 2 === 0 ? Y_TOP : Y_BOT,
+  }));
+  const edges = nodes.slice(0, -1).map((node, i) => {
+    const next = nodes[i + 1];
+    const sx = node.cx + NODE_W / 2;
+    const ex = next.cx - NODE_W / 2;
+    return `M${sx},${node.cy} C${sx + 34},${node.cy} ${ex - 34},${next.cy} ${ex},${next.cy}`;
+  });
+  return { nodes, edges };
+}
 
 export function PipelineShowcase({ href }: { href: string }) {
   const [active, setActive] = useState(0);
@@ -220,35 +247,78 @@ export function PipelineShowcase({ href }: { href: string }) {
           <h3 className="mt-3 text-[20px] font-bold tracking-tight text-ink">{current.title}</h3>
           <p className="mt-1.5 max-w-md text-[13.5px] leading-relaxed text-ink-soft">{current.description}</p>
 
-          {/* flow diagram — re-staggers per pipeline, vertically centred to fill the panel */}
-          <div
-            key={active}
-            className="mt-6 flex flex-1 flex-wrap content-center items-center gap-x-2.5 gap-y-3"
-          >
+          {/* mobile: readable vertical step list (canvas is too cramped under sm) */}
+          <ul className="mt-6 flex flex-col gap-2 sm:hidden">
             {current.steps.map((step, idx) => {
               const StepIcon = step.icon;
               return (
-                <Fragment key={step.label}>
-                  <div
-                    className="animate-fade-in flex items-center gap-2.5 rounded-xl border border-line bg-base px-3.5 py-3 shadow-[0_2px_8px_-3px_rgba(17,24,39,0.12),0_1px_2px_rgba(17,24,39,0.05)]"
-                    style={{ animationDelay: `${idx * 0.09}s` }}
-                  >
-                    <span className="flex size-8 flex-none items-center justify-center rounded-lg" style={chipStyle(ACCENT)}>
-                      <StepIcon size={16} strokeWidth={2} />
-                    </span>
-                    <span className="text-[13px] font-semibold whitespace-nowrap text-ink">{step.label}</span>
-                  </div>
-                  {idx < current.steps.length - 1 && (
-                    <ChevronRight
-                      size={18}
-                      strokeWidth={2.5}
-                      className="animate-fade-in flex-none text-ink-faint"
-                      style={{ animationDelay: `${idx * 0.09 + 0.045}s` }}
-                    />
-                  )}
-                </Fragment>
+                <li
+                  key={step.label}
+                  className="animate-fade-in flex items-center gap-2.5 rounded-xl border border-line bg-base px-3 py-2.5 shadow-[0_1px_2px_rgba(17,24,39,0.05)]"
+                  style={{ animationDelay: `${idx * 0.08}s` }}
+                >
+                  <span className="flex size-7 flex-none items-center justify-center rounded-lg" style={chipStyle(ACCENT)}>
+                    <StepIcon size={15} strokeWidth={2} />
+                  </span>
+                  <span className="text-[13px] font-semibold text-ink">{step.label}</span>
+                </li>
               );
             })}
+          </ul>
+
+          {/* sm+: node canvas — real workflow-builder style: zig-zag nodes + curved connectors */}
+          <div key={active} className="relative mt-6 hidden min-h-[190px] flex-1 sm:block">
+            {(() => {
+              const { nodes, edges } = layoutNodes(current.steps.length);
+              return (
+                <>
+                  <svg
+                    className="absolute inset-0 h-full w-full"
+                    viewBox={`0 0 ${VB_W} ${VB_H}`}
+                    preserveAspectRatio="none"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    {edges.map((d, i) => (
+                      <g key={d} className="animate-fade-in" style={{ animationDelay: `${i * 0.12 + 0.25}s` }}>
+                        <path d={d} stroke="var(--color-line)" strokeWidth={1.5} vectorEffect="non-scaling-stroke" />
+                        <path
+                          d={d}
+                          className="edge-flow"
+                          stroke={ACCENT}
+                          strokeWidth={1.5}
+                          strokeLinecap="round"
+                          vectorEffect="non-scaling-stroke"
+                        />
+                      </g>
+                    ))}
+                  </svg>
+
+                  {current.steps.map((step, idx) => {
+                    const StepIcon = step.icon;
+                    const node = nodes[idx];
+                    return (
+                      <div
+                        key={step.label}
+                        className="animate-fade-in absolute flex items-center gap-2 rounded-xl border border-line bg-base px-3 shadow-[0_2px_8px_-3px_rgba(17,24,39,0.12),0_1px_2px_rgba(17,24,39,0.05)]"
+                        style={{
+                          left: pct(node.cx - NODE_W / 2, VB_W),
+                          top: pct(node.cy - NODE_H / 2, VB_H),
+                          width: pct(NODE_W, VB_W),
+                          height: pct(NODE_H, VB_H),
+                          animationDelay: `${idx * 0.12}s`,
+                        }}
+                      >
+                        <span className="flex size-7 flex-none items-center justify-center rounded-lg" style={chipStyle(ACCENT)}>
+                          <StepIcon size={15} strokeWidth={2} />
+                        </span>
+                        <span className="truncate text-[12px] font-semibold text-ink">{step.label}</span>
+                      </div>
+                    );
+                  })}
+                </>
+              );
+            })()}
           </div>
 
           <a
