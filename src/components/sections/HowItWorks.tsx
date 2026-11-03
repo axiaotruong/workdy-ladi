@@ -22,7 +22,7 @@ const steps = [
     icon: Play,
     accent: "ink" as const,
     title: "Run it and use the output",
-    description: "On demand, on a schedule, or via webhook. Get reports, listings, or send results anywhere.",
+    description: "On demand, on a schedule, or via webhook. Get reports, storyboards, videos, or send results anywhere.",
   },
 ];
 

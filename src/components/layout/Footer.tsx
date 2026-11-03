@@ -5,6 +5,7 @@ const columns = [
   {
     title: "Product",
     links: [
+      { label: "Showcase", href: "#showcase" },
       { label: "How it works", href: "#how-it-works" },
       { label: "Pipelines", href: "#pipelines" },
       { label: "Integrations", href: "#integrations" },
@@ -32,8 +33,8 @@ export function Footer() {
           <div className="col-span-2 sm:col-span-1">
             <Image src="/logo-on-dark.png" alt={siteConfig.name} width={140} height={28} />
             <p className="mt-4 max-w-sm text-[13.5px] leading-relaxed text-white/55">
-              AI employees for POD sellers — research, ad videos, and listings, handled by a team
-              that runs 1 or 100 with the same effort.
+              AI employees for cross-border e-commerce — market research and Seedance product videos,
+              handled by a team that runs 1 or 100 with the same effort.
             </p>
           </div>
 
@@ -62,7 +63,7 @@ export function Footer() {
           <span>
             © {year} {siteConfig.name}. All rights reserved.
           </span>
-          <span>Built for POD sellers — and teams that want to scale.</span>
+          <span>Built for cross-border sellers — and teams that want to scale.</span>
         </div>
       </div>
     </footer>

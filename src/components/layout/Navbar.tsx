@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 
 const navLinks = [
+  { label: "Showcase", href: "#showcase" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Pipelines", href: "#pipelines" },
   { label: "Pricing", href: "#pricing" },
@@ -26,7 +27,7 @@ export function Navbar() {
     <header
       className={`sticky top-0 z-50 transition-all duration-200 ${
         scrolled
-          ? "border-b border-line-subtle bg-base/85 shadow-[0_1px_0_rgba(17,24,39,0.04)] backdrop-blur"
+          ? "border-b border-line-subtle bg-base/95 shadow-[0_1px_0_rgba(17,24,39,0.04)] backdrop-blur"
           : "border-b border-transparent bg-base/0"
       }`}
     >

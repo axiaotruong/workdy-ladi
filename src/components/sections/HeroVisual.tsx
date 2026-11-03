@@ -318,7 +318,7 @@ export function HeroVisual() {
                   transition={{ duration: 0.25, ease: EASE }}
                   className="absolute inset-0 truncate text-[12px] font-semibold text-ink"
                 >
-                  {writing ? "Generating hook…" : "Write sales script"}
+                  {writing ? "Planning shots…" : "Storyboard"}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -474,7 +474,7 @@ export function HeroVisual() {
               </AnimatePresence>
             </div>
             <div className="flex items-center gap-1.5 px-2.5 py-1.5">
-              <span className="truncate text-[11px] font-semibold text-ink">POD sales video</span>
+              <span className="truncate text-[11px] font-semibold text-ink">Seedance · 9:16 video</span>
               <span
                 className={`ml-auto size-1.5 flex-none rounded-full ${
                   videoState === "ready" ? "bg-dot-ready" : videoState === "rendering" ? "bg-dot-processing" : "bg-dot-idle"
@@ -523,7 +523,7 @@ export function HeroVisual() {
           <div className="text-[13px] font-bold tabular text-ink">
             <LiveCount />
           </div>
-          <div className="text-[9.5px] text-ink-faint">listings today</div>
+          <div className="text-[9.5px] text-ink-faint">videos drafted today</div>
         </div>
       </motion.div>
     </div>
@@ -531,9 +531,9 @@ export function HeroVisual() {
 }
 
 const roster = [
-  { dot: "bg-dot-ready", name: "Niche Researcher", value: "live" },
-  { dot: "bg-cat-purple", name: "Video Ad Maker", value: "2 / 5" },
-  { dot: "bg-dot-processing", name: "Listing Writer", value: "142" },
+  { dot: "bg-dot-ready", name: "Spy Market", value: "live" },
+  { dot: "bg-cat-purple", name: "Image → Video", value: "2 / 5" },
+  { dot: "bg-dot-processing", name: "Video Remaker", value: "142" },
 ];
 
 function FloatingRoster() {

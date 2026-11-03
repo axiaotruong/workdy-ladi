@@ -1,17 +1,19 @@
-import type { CSSProperties } from "react";
-import type { IconType } from "react-icons";
-import { SiGoogle, SiTiktok, SiWordpress, SiNotion, SiTelegram, SiGithub } from "react-icons/si";
+import type { ComponentType, CSSProperties } from "react";
+import { SiGoogle, SiTiktok, SiNotion, SiTelegram, SiGithub } from "react-icons/si";
 import { FaSlack } from "react-icons/fa6";
-import { Plus } from "lucide-react";
+import { Plus, MessagesSquare } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { ChatDemo } from "@/components/sections/ChatDemo";
 
-const integrations: { name: string; icon: IconType; color: string }[] = [
+// react-icons has no Lark mark — a neutral chat glyph stands in for it.
+const LarkIcon = MessagesSquare;
+
+const integrations: { name: string; icon: ComponentType<{ size?: number; className?: string }>; color: string }[] = [
   { name: "Google", icon: SiGoogle, color: "#4285F4" },
   { name: "TikTok Ads", icon: SiTiktok, color: "#EE1D52" },
-  { name: "WordPress", icon: SiWordpress, color: "#21759B" },
   { name: "Slack", icon: FaSlack, color: "#611F69" },
+  { name: "Lark", icon: LarkIcon, color: "#3370FF" },
   { name: "Notion", icon: SiNotion, color: "#111827" },
   { name: "Telegram", icon: SiTelegram, color: "#26A5E4" },
   { name: "GitHub", icon: SiGithub, color: "#181717" },

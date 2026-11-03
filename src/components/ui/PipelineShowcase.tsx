@@ -4,16 +4,14 @@ import { useEffect, useState } from "react";
 import {
   Search,
   Clapperboard,
-  PenLine,
+  Repeat,
   Megaphone,
   TrendingUp,
-  Users,
-  Building2,
-  Image as ImageIcon,
   Lightbulb,
+  Image as ImageIcon,
+  Film,
   Video,
-  Eye,
-  Send,
+  Gauge,
   BarChart3,
   FileText,
   ArrowRight,
@@ -22,7 +20,7 @@ import {
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { useInView } from "@/lib/useInView";
 
-type Category = "Research" | "Creative" | "Content" | "Ads";
+type Category = "Research" | "Creative" | "Remake" | "Ads";
 
 // Single accent woven into an otherwise neutral page; categories are
 // distinguished by icon + label, not by hue.
@@ -31,7 +29,7 @@ const ACCENT = "var(--color-cat-purple)";
 const CATEGORY_ICON: Record<Category, LucideIcon> = {
   Research: Search,
   Creative: Clapperboard,
-  Content: PenLine,
+  Remake: Repeat,
   Ads: Megaphone,
 };
 
@@ -46,33 +44,34 @@ type Pipeline = {
 const PIPELINES: Pipeline[] = [
   {
     category: "Research",
-    title: "Find a winning niche",
-    description: "Spot demand, size up competitors, get a decision-ready report in minutes.",
+    title: "Spy the market",
+    description: "Scan real demand from Google Trends, search, Facebook Ads, TikTok, and Etsy — then get product ideas with a content angle.",
     steps: [
-      { label: "Scan Market Demand", icon: TrendingUp },
-      { label: "Detect Competitors", icon: Users },
-      { label: "Company Deep Dive", icon: Building2 },
+      { label: "Scan Demand", icon: TrendingUp },
+      { label: "Ideas from Data", icon: Lightbulb },
+      { label: "Creative Angle", icon: Search },
     ],
   },
   {
     category: "Creative",
-    title: "Produce an ad video",
-    description: "From product photos to a finished ad video — no manual editing.",
+    title: "Product photos → TikTok video",
+    description: "Drop in product photos, approve a storyboard, and render a 9:16 video with Seedance.",
     steps: [
-      { label: "Analyze Product Images", icon: ImageIcon },
-      { label: "Find Creative Angle", icon: Lightbulb },
-      { label: "Generate Video", icon: Video },
+      { label: "Analyze Product", icon: ImageIcon },
+      { label: "Creative Angle", icon: Lightbulb },
+      { label: "Storyboard", icon: Film },
+      { label: "Seedance Video", icon: Video },
     ],
   },
   {
-    category: "Content",
-    title: "Write listings at scale",
-    description: "Titles, descriptions, and tags for hundreds of products — reviewed before going live.",
+    category: "Remake",
+    title: "Remake an ad that already sells",
+    description: "Give it a reference video — Workdy measures its cuts and shot order, then rebuilds it around your product.",
     steps: [
-      { label: "Keyword Research", icon: Search },
-      { label: "Write Article", icon: PenLine },
-      { label: "Human review", icon: Eye },
-      { label: "Publish", icon: Send },
+      { label: "Measure Cuts", icon: Gauge },
+      { label: "Read Photos", icon: ImageIcon },
+      { label: "Remake Shots", icon: Film },
+      { label: "Seedance Video", icon: Video },
     ],
   },
   {
@@ -81,7 +80,7 @@ const PIPELINES: Pipeline[] = [
     description: "Sync campaign performance and get an automatic daily report.",
     steps: [
       { label: "TikTok Campaigns", icon: Megaphone },
-      { label: "Ads Performance Sync", icon: BarChart3 },
+      { label: "Performance Sync", icon: BarChart3 },
       { label: "Report", icon: FileText },
     ],
   },
@@ -162,7 +161,7 @@ export function PipelineShowcase({ href }: { href: string }) {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Left: selectable pipeline list */}
-      <div role="tablist" aria-label="POD pipelines" className="flex flex-col gap-2" onKeyDown={handleKeyDown}>
+      <div role="tablist" aria-label="Workdy pipelines" className="flex flex-col gap-2" onKeyDown={handleKeyDown}>
         {PIPELINES.map((p, i) => {
           const selected = i === active;
           const Icon = CATEGORY_ICON[p.category];

@@ -10,11 +10,11 @@ const faqs = [
   },
   {
     q: "What AI models does Workdy use?",
-    a: "GPT-4o, Claude, and Gemini — pick per employee, or bring your own API key.",
+    a: "Gemini handles research, reading product photos, and writing. Videos are rendered with Seedance 2.5, ByteDance's latest video model.",
   },
   {
     q: "How is this different from Zapier or n8n?",
-    a: "Those are general automation tools. Workdy comes with AI employees and ready-to-run pipelines built for POD sellers — niche research, ad videos, listings, and ads — so you're not starting from a blank canvas.",
+    a: "Those are general automation tools. Workdy comes with AI employees and ready-to-run pipelines built for e-commerce sellers — market research, product videos, and ad remakes — so you're not starting from a blank canvas.",
   },
   {
     q: "Can I review what my AI employees do before it goes live?",
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "Can I connect Workdy to my own tools?",
-    a: "Yes — Google, TikTok Ads, WordPress, Slack, Notion, and Telegram are built in. For anything else, use HTTP, JavaScript, or your own MCP server.",
+    a: "Yes — Google, TikTok Ads, Slack, Lark, Notion, GitHub, and Telegram are built in. For anything else, use HTTP, JavaScript, or your own MCP server.",
   },
   {
     q: "What does it cost?",

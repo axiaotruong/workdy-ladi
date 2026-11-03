@@ -24,7 +24,7 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-[pulse-ring_1.8s_ease-out_infinite] rounded-full bg-dot-ready" />
               <span className="relative inline-flex size-1.5 rounded-full bg-dot-ready" />
             </span>
-            AI workforce · POD
+            AI workforce · E-commerce
           </span>
 
           <h1
@@ -32,16 +32,16 @@ export function Hero() {
             style={{ animationDelay: "0.08s" }}
           >
             Hire AI{" "}
-            <TypingWord words={["employees", "researchers", "marketers", "designers", "editors"]} />{" "}
-            for your POD store
+            <TypingWord words={["employees", "researchers", "creators", "marketers", "editors"]} />{" "}
+            for your online store
           </h1>
 
           <p
             className="animate-fade-in mt-5 max-w-lg text-lg leading-relaxed text-ink-soft"
             style={{ animationDelay: "0.16s" }}
           >
-            Research, ad videos, listings — your AI employees handle the repetitive work so you
-            can focus on growth. Run 1 or 100, same effort.
+            Spy the market, turn product photos into TikTok videos, remake ads that already
+            sell — your AI employees do the repetitive work. Run 1 or 100, same effort.
           </p>
 
           <div
@@ -50,7 +50,7 @@ export function Hero() {
           >
             <Button href={siteConfig.appUrl}>
               Start free
-              <ArrowRight size={17} strokeWidth={2.2} />
+              <ArrowRight size={17} strokeWidth={2.2} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
             </Button>
             <Button href="#pipelines" variant="secondary">
               <PlayCircle size={17} strokeWidth={2} />
@@ -62,7 +62,7 @@ export function Hero() {
             className="animate-fade-in mt-6 text-[13px] text-ink-faint"
             style={{ animationDelay: "0.32s" }}
           >
-            Powered by GPT-4o · Claude · Gemini · No credit card needed
+            Powered by Gemini · Videos by Seedance 2.5 · No credit card needed
           </p>
         </div>
 

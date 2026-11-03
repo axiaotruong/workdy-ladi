@@ -38,7 +38,7 @@ export function FinalCta() {
           <div className="mt-9 flex justify-center">
             <Button href={siteConfig.appUrl} variant="invert">
               Start free
-              <ArrowRight size={17} strokeWidth={2.2} />
+              <ArrowRight size={17} strokeWidth={2.2} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
             </Button>
           </div>
         </Reveal>

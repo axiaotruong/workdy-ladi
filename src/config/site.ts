@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Workdy",
-  title: "Workdy — Hire AI employees for your POD store",
+  title: "Workdy — AI employees for cross-border e-commerce",
   description:
-    "Research, ad videos, listings — your AI employees handle the repetitive work so you can focus on growth. Run 1 or 100, same effort.",
+    "Market research and TikTok-ready product videos powered by Seedance — your AI employees handle the repetitive work so you can focus on selling. Run 1 or 100, same effort.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://workdy.ai",
   appUrl: process.env.NEXT_PUBLIC_APP_URL ?? "https://app.workdy.ai",
   ogImage: "/og.png",
@@ -10,8 +10,10 @@ export const siteConfig = {
   keywords: [
     "AI employees",
     "AI workforce",
-    "POD automation",
-    "print on demand tools",
+    "cross-border ecommerce",
+    "AI product video",
+    "Seedance video generator",
+    "TikTok ad video",
     "AI agents for ecommerce",
     "workflow automation",
   ],

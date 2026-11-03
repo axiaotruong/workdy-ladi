@@ -8,8 +8,8 @@ export function UseCasePipelines() {
     <Section id="pipelines" bg="subtle">
       <SectionHeading
         eyebrow="Pipelines"
-        title="Pipelines built for POD sellers"
-        description="The research, video, and listing work that eats your day — four ready-made pipelines, every step a real tool inside Workdy. Use them as is, no setup required."
+        title="Pipelines built for online sellers"
+        description="The research and video work that eats your day — ready-made pipelines, every step a real tool inside Workdy. Every account starts with them, no setup required."
       />
 
       <PipelineShowcase href={siteConfig.appUrl} />

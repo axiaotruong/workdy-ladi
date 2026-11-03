@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { SeedanceShowcase } from "@/components/sections/SeedanceShowcase";
 import { ScaleWithoutHiring } from "@/components/sections/ScaleWithoutHiring";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { UseCasePipelines } from "@/components/sections/UseCasePipelines";
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <main className="flex-1">
       <Hero />
+      <SeedanceShowcase />
       <ScaleWithoutHiring />
       <HowItWorks />
       <UseCasePipelines />

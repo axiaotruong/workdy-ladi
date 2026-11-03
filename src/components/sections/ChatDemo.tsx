@@ -11,10 +11,10 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 type Msg = { from: "user" | "bot"; text: string };
 
 const script: Msg[] = [
-  { from: "user", text: "How's my store doing today?" },
-  { from: "bot", text: "24 new orders today 🎉 Revenue is up 18% vs yesterday." },
-  { from: "user", text: "Draft listings for the 3 new products." },
-  { from: "bot", text: "Done ✅ 3 listings written — titles, tags, and descriptions. Publish them?" },
+  { from: "user", text: "Spy the market for custom pet gifts in the US." },
+  { from: "bot", text: "Scanned 5 sources 📊 Top idea: pet memorial ornament — rising searches, few ads." },
+  { from: "user", text: "Remake this TikTok for my new hoodie." },
+  { from: "bot", text: "Storyboard ready ✅ 15s, 9:16, same pacing as the original. Render with Seedance?" },
 ];
 
 // timeline: how many messages are visible, whether the bot is "typing", and hold time
