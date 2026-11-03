@@ -19,20 +19,13 @@ export function Hero() {
 
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
         <div>
-          <span className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-line bg-base/70 px-3 py-1.5 text-xs font-semibold tracking-wide text-ink-soft uppercase backdrop-blur">
-            <span className="relative flex size-1.5">
-              <span className="absolute inline-flex size-full animate-[pulse-ring_1.8s_ease-out_infinite] rounded-full bg-dot-ready" />
-              <span className="relative inline-flex size-1.5 rounded-full bg-dot-ready" />
-            </span>
-            AI workforce · E-commerce
-          </span>
-
           <h1
-            className="animate-fade-in mt-5 text-[clamp(2.25rem,5.2vw,3.75rem)] leading-[1.05] font-bold tracking-tight text-balance text-ink"
+            className="animate-fade-in text-[clamp(2rem,5.2vw,3.75rem)] leading-[1.05] font-bold tracking-tight text-balance text-ink"
             style={{ animationDelay: "0.08s" }}
           >
             Hire AI{" "}
-            <TypingWord words={["employees", "researchers", "creators", "marketers", "editors"]} />{" "}
+            <TypingWord words={["employees", "researchers", "creators", "marketers", "editors"]} />
+            <br />
             for your online store
           </h1>
 
@@ -54,7 +47,7 @@ export function Hero() {
             </Button>
             <Button href="#pipelines" variant="secondary">
               <PlayCircle size={17} strokeWidth={2} />
-              See a real workflow run
+              See the pipelines
             </Button>
           </div>
 

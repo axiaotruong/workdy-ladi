@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ImageIcon, Sparkles, Play, TrendingUp } from "lucide-react";
+import { ImageIcon, Sparkles, Play } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -103,7 +103,7 @@ export function HeroVisual() {
           <span className="size-2.5 rounded-full bg-dot-processing/70" />
           <span className="size-2.5 rounded-full bg-dot-ready/70" />
           <span className="ml-3 rounded-md bg-base px-2.5 py-1 font-mono text-[10.5px] tracking-wide text-ink-faint ring-1 ring-line">
-            workdy · pod-sales-video.flow
+            workdy · product-video.flow
           </span>
           <span className="ml-auto hidden items-center gap-1.5 rounded-md bg-dot-ready/10 px-2 py-1 text-[10.5px] font-semibold text-green-600 sm:inline-flex">
             <span className="size-1.5 rounded-full bg-dot-ready" />
@@ -156,10 +156,12 @@ export function HeroVisual() {
             {/* traveling packet — node 1 to node 2 */}
             {!reduce && travelingA ? (
               <motion.circle
+                cx={200}
+                cy={100}
                 r={5}
                 fill="var(--color-dot-ready)"
                 initial={{ opacity: 0 }}
-                animate={{ cx: [200, 225], cy: [100, 100], opacity: [0, 1, 1, 0] }}
+                animate={{ x: [0, 25], opacity: [0, 1, 1, 0] }}
                 transition={{ duration: 0.7, ease: "easeInOut" }}
               />
             ) : null}
@@ -167,12 +169,14 @@ export function HeroVisual() {
             {/* traveling packet — node 2 down and across to the video output */}
             {!reduce && travelingB ? (
               <motion.circle
+                cx={310}
+                cy={136}
                 r={5}
                 fill="var(--color-dot-ready)"
                 initial={{ opacity: 0 }}
                 animate={{
-                  cx: [310, 310, 355],
-                  cy: [136, 270, 270],
+                  x: [0, 0, 0, 45, 45],
+                  y: [0, 0, 134, 134, 134],
                   opacity: [0, 1, 1, 1, 0],
                 }}
                 transition={{ duration: 0.9, ease: "easeInOut", times: [0, 0.05, 0.55, 0.9, 1] }}
@@ -339,7 +343,7 @@ export function HeroVisual() {
             transition={{ duration: 0.6, ease: EASE }}
           />
 
-          {/* output node — rendered POD sales video */}
+          {/* output node — rendered product video */}
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.94 }}
             animate={reduce ? { opacity: 1, y: 0, scale: 1 } : { opacity: 1, y: 0, scale: 1 }}
@@ -517,13 +521,13 @@ export function HeroVisual() {
         className="animate-float-slow absolute -top-5 -right-3 flex items-center gap-2 rounded-xl border border-line bg-base/95 px-3 py-2 shadow-[0_16px_40px_-18px_rgba(17,24,39,0.4)] backdrop-blur sm:-right-6"
       >
         <span className="flex size-7 items-center justify-center rounded-lg bg-cat-green/10 text-green-600">
-          <TrendingUp size={15} strokeWidth={2.2} />
+          <Play size={13} strokeWidth={2.4} fill="currentColor" />
         </span>
         <div className="leading-tight">
           <div className="text-[13px] font-bold tabular text-ink">
-            <LiveCount />
+            9:16 · 15s
           </div>
-          <div className="text-[9.5px] text-ink-faint">videos drafted today</div>
+          <div className="text-[9.5px] text-ink-faint">TikTok-ready video</div>
         </div>
       </motion.div>
     </div>
@@ -550,17 +554,4 @@ function FloatingRoster() {
       ))}
     </div>
   );
-}
-
-function LiveCount() {
-  const [n, setN] = useState(142);
-  const reduce = useReducedMotion();
-
-  useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => setN((v) => v + 1 + Math.floor(Math.random() * 2)), 3200);
-    return () => clearInterval(id);
-  }, [reduce]);
-
-  return <>{n}</>;
 }

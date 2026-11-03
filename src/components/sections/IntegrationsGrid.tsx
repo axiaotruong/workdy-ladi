@@ -26,10 +26,7 @@ export function IntegrationsGrid() {
         {/* left: copy + real brand logos */}
         <div>
           <Reveal>
-            <span className="inline-flex items-center rounded-full bg-base px-3 py-1 text-[11px] font-semibold tracking-wide text-ink-soft uppercase ring-1 ring-inset ring-line">
-              Integrations
-            </span>
-            <h2 className="mt-4 text-[clamp(1.75rem,4vw,2.5rem)] leading-tight font-bold tracking-tight text-balance text-ink">
+            <h2 className="text-[clamp(1.75rem,4vw,2.5rem)] leading-tight font-bold tracking-tight text-balance text-ink">
               Connects with the tools you already use
             </h2>
             <p className="mt-4 max-w-md text-[15.5px] leading-relaxed text-ink-soft">

@@ -10,8 +10,8 @@ const PLAN_STEPS = [
   { icon: LogIn, label: "Keyword input", type: "input" as const },
   { icon: Globe, label: "Etsy Search", type: "http" as const },
   { icon: Cog, label: "Rank top 5", type: "code" as const },
-  { icon: Sparkles, label: "AI redesign", type: "llm" as const },
-  { icon: FileOutput, label: "R&D report", type: "output" as const },
+  { icon: Sparkles, label: "AI analysis", type: "llm" as const },
+  { icon: FileOutput, label: "Product report", type: "output" as const },
 ];
 
 const TYPE_META = {

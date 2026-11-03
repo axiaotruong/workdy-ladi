@@ -47,11 +47,7 @@ export function SeedanceShowcase() {
 
       <div className="relative mx-auto max-w-6xl px-6 pt-20 sm:px-8 sm:pt-24">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-white/75 uppercase backdrop-blur">
-            <span className="size-1.5 rounded-full bg-cat-purple" />
-            Made with Workdy × Seedance
-          </span>
-          <h2 className="mt-5 text-[clamp(1.9rem,4.4vw,2.9rem)] leading-[1.08] font-bold tracking-tight text-balance">
+          <h2 className="text-[clamp(1.9rem,4.4vw,2.9rem)] leading-[1.08] font-bold tracking-tight text-balance">
             Product videos that look shot, not generated
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[15.5px] leading-relaxed text-pretty text-white/65">
@@ -81,6 +77,7 @@ export function SeedanceShowcase() {
               return (
                 <li key={key} className="snap-start" aria-hidden={index >= CLIPS.length ? true : undefined}>
                   <VideoCard
+                    focusable={index < CLIPS.length}
                     clip={clip}
                     autoPlay={!reduce}
                     withSound={soundKey === key}
@@ -94,19 +91,13 @@ export function SeedanceShowcase() {
       </Reveal>
 
       <div className="relative mx-auto max-w-6xl px-6 pt-14 pb-20 text-center sm:px-8 sm:pb-24">
-        <Reveal>
-          <p className="text-[13px] font-semibold tracking-wide text-white/45 uppercase">
-            Powered by the Seedance family
-          </p>
-        </Reveal>
-
-        <Stagger className="mx-auto mt-5 grid max-w-4xl grid-cols-2 gap-3 lg:grid-cols-4">
+        <Stagger className="mx-auto grid max-w-4xl grid-cols-2 gap-3 lg:grid-cols-4">
           {MODELS.map((model) => {
             const Icon = model.icon;
             return (
               <StaggerItem key={model.name}>
                 <div
-                  className={`flex h-full items-center gap-3 rounded-2xl border px-4 py-3.5 text-left transition-colors duration-200 hover:border-white/25 ${
+                  className={`flex h-full flex-col items-start gap-2.5 rounded-2xl border px-4 py-3.5 sm:flex-row sm:items-center sm:gap-3 text-left transition-colors duration-200 hover:border-white/25 ${
                     model.isNew
                       ? "border-cat-purple/45 bg-[linear-gradient(160deg,rgba(139,92,246,0.2),rgba(139,92,246,0.05))] shadow-[0_0_36px_-14px_rgba(139,92,246,0.7)]"
                       : "border-white/10 bg-dark-card"
@@ -148,9 +139,10 @@ type VideoCardProps = {
   autoPlay: boolean;
   withSound: boolean;
   onToggleSound: () => void;
+  focusable: boolean;
 };
 
-function VideoCard({ clip, autoPlay, withSound, onToggleSound }: VideoCardProps) {
+function VideoCard({ clip, autoPlay, withSound, onToggleSound, focusable }: VideoCardProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const [near, setNear] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -183,6 +175,7 @@ function VideoCard({ clip, autoPlay, withSound, onToggleSound }: VideoCardProps)
   return (
     <button
       type="button"
+      tabIndex={focusable ? undefined : -1}
       onClick={onToggleSound}
       aria-label={`${clip.product} — ${withSound ? "mute" : "play with sound"}`}
       className={`group relative block aspect-[9/16] w-[168px] overflow-hidden rounded-2xl bg-dark-card text-left ring-1 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 sm:w-[212px] ${

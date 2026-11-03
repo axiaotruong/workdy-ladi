@@ -30,7 +30,6 @@ export function ScaleWithoutHiring() {
   return (
     <Section bg="subtle">
       <SectionHeading
-        eyebrow="Why Workdy"
         title="Scale without hiring"
         description="People cost salary and time, and each hire only does so much. Set a workflow up once and your output stops being capped by headcount."
       />

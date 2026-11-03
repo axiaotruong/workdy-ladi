@@ -12,7 +12,7 @@ type ButtonProps = {
 // Hover: lift + soft shadow, a light sweep across the face, and a trailing arrow that nudges right.
 // All motion is disabled for users who prefer reduced motion.
 const base =
-  "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-[9px] font-semibold transition-[transform,box-shadow,background-color,border-color] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] " +
+  "group relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-[9px] font-semibold transition-[transform,box-shadow,background-color,border-color] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] " +
   "before:pointer-events-none before:absolute before:inset-y-0 before:-left-1/3 before:w-1/3 before:-skew-x-12 before:-translate-x-full before:transition-transform before:duration-700 before:ease-out hover:before:translate-x-[450%] " +
   "motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:before:hidden";
 

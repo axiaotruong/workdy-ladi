@@ -76,12 +76,12 @@ const PIPELINES: Pipeline[] = [
   },
   {
     category: "Ads",
-    title: "Run and optimize ads",
-    description: "Sync campaign performance and get an automatic daily report.",
+    title: "Score a video before you spend",
+    description: "Paste a video link — Workdy compares it with ads that already spent real money in your niche and shows where yours falls behind.",
     steps: [
-      { label: "TikTok Campaigns", icon: Megaphone },
-      { label: "Performance Sync", icon: BarChart3 },
-      { label: "Report", icon: FileText },
+      { label: "Your Video", icon: Video },
+      { label: "Match Real Ads", icon: BarChart3 },
+      { label: "Scorecard", icon: FileText },
     ],
   },
 ];

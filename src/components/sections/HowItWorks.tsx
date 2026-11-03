@@ -30,7 +30,6 @@ export function HowItWorks() {
   return (
     <Section id="how-it-works">
       <SectionHeading
-        eyebrow="How it works"
         title="From idea to running workflow in 3 steps"
         description="No code. Just describe the job, connect the steps, and let your AI assistant run it."
       />

@@ -30,7 +30,6 @@ export function BuiltForTrust() {
   return (
     <Section>
       <SectionHeading
-        eyebrow="Peace of mind"
         title="Stay in control"
         description="You hand off the busywork — not the decisions. Workdy keeps you in the loop at every step."
       />

@@ -26,7 +26,6 @@ export function BrandKnowledge() {
   return (
     <Section bg="subtle">
       <SectionHeading
-        eyebrow="Output quality"
         title="AI employees that know your brand"
         description="Grounded in your own material, tuned to your voice, with memory that sticks."
       />

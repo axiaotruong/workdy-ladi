@@ -39,7 +39,6 @@ export function PublishAndDeploy() {
   return (
     <Section>
       <SectionHeading
-        eyebrow="Ship it"
         title="Publish once, use everywhere"
         description="Build a workflow, then ship it however you need — as a shared tool, an API, or a webhook, with versions kept safe."
       />

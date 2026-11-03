@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SiTelegram } from "react-icons/si";
-import { Send, Sparkles } from "lucide-react";
+import { Send } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -57,7 +57,7 @@ export function ChatDemo() {
             <span className="absolute -right-0.5 -bottom-0.5 size-2.5 rounded-full border-2 border-base bg-dot-ready" />
           </span>
           <div className="min-w-0">
-            <div className="truncate text-[13.5px] font-bold text-ink">Support Agent</div>
+            <div className="truncate text-[13.5px] font-bold text-ink">Workdy Agent</div>
             <div className="text-[11px] text-ink-faint">AI employee · online</div>
           </div>
           <span className="ml-auto flex items-center gap-1.5 rounded-full bg-[#26A5E4]/10 px-2.5 py-1 text-[11px] font-semibold text-[#1b8ec9]">
@@ -125,12 +125,6 @@ export function ChatDemo() {
             <Send size={15} strokeWidth={2.2} />
           </span>
         </div>
-      </div>
-
-      {/* coming soon chip — Lark (per handoff: not yet live) */}
-      <div className="animate-float-slow absolute -bottom-4 -left-3 flex items-center gap-1.5 rounded-full border border-line bg-base/95 px-3 py-1.5 text-[11px] font-medium text-ink-soft shadow-[0_12px_30px_-14px_rgba(17,24,39,0.4)] backdrop-blur sm:-left-6">
-        <Sparkles size={12} className="text-ink-faint" />
-        Lark &amp; web widget — coming soon
       </div>
     </div>
   );

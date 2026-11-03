@@ -51,10 +51,7 @@ export function FAQ() {
       <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <Reveal>
           <div className="lg:sticky lg:top-28">
-            <span className="inline-flex items-center rounded-full bg-base px-3 py-1 text-[11px] font-semibold tracking-wide text-ink-soft uppercase ring-1 ring-inset ring-line">
-              FAQ
-            </span>
-            <h2 className="mt-4 text-[clamp(1.75rem,4vw,2.5rem)] leading-tight font-bold tracking-tight text-ink">
+            <h2 className="text-[clamp(1.75rem,4vw,2.5rem)] leading-tight font-bold tracking-tight text-ink">
               Frequently asked questions
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">

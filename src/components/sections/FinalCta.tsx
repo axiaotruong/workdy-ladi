@@ -15,15 +15,8 @@ export function FinalCta() {
       />
 
       <div className="relative mx-auto max-w-3xl px-6 py-24 text-center sm:px-8 sm:py-28">
-        <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold tracking-wide text-white/70 uppercase backdrop-blur">
-            <span className="size-1.5 rounded-full bg-dot-ready" />
-            Ready when you are
-          </span>
-        </Reveal>
-
         <Reveal delay={0.08}>
-          <h2 className="mt-6 text-[clamp(2rem,5vw,3.25rem)] leading-[1.08] font-bold tracking-tight text-balance">
+          <h2 className="text-[clamp(2rem,5vw,3.25rem)] leading-[1.08] font-bold tracking-tight text-balance">
             Hire your first AI employee today
           </h2>
         </Reveal>

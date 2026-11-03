@@ -119,6 +119,9 @@ export function ScaleCalculator() {
           That&apos;s <span className="font-bold text-cat-purple">{gapHours} hours a month</span> back in your
           pocket — and the gap only widens as you add more products.
         </div>
+        <p className="mt-3 text-center text-[11.5px] text-ink-faint">
+          Estimate assumes ~{MINUTES_PER_PRODUCT} minutes of manual work per product.
+        </p>
       </div>
     </div>
   );
